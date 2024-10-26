@@ -37,7 +37,7 @@ def predict():
         opposition = request.form['opposition']
         place = request.form['place']
         playerList = request.form.get('inputList')
-        playerList = json.loads(playerList)
+        # playerList = json.loads(playerList)
         print(opposition)
         print(playerList)
         print(place)
@@ -48,13 +48,11 @@ def predict():
 @app.route("/filter", methods=["POST", "GET"])
 def filter():
     if request.method == "POST":
-        teamList = request.form.get('hiddenTeams')
-        statList = request.form.get('hiddenStats')
-        teamList = json.loads(teamList)
-        statList = json.loads(statList)
-        print(teamList)
-        print(statList)
-        return redirect("/sustainability")
+        teams = request.form.getlist('team')
+        stats = request.form.getlist('stat')
+        print(teams)
+        print(stats)
+        return "check terminal"
     
     return redirect("/")
 
