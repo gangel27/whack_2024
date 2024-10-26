@@ -9,8 +9,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    
-    return render_template("index.html", )
+    plt.plot([i for i in range(10)], [i + 1 for i in range(10)])
+    plt.savefig('./static/images/new_plot.png')
+    return render_template("index.html", name = 'new_plot', url ='./static/images/new_plot.png')
 
 
 @app.route("/data", methods=["GET"])
