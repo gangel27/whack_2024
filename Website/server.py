@@ -45,6 +45,18 @@ def predict():
     
     return redirect("/")
 
+@app.route("/filter", methods=["POST", "GET"])
+def filter():
+    if request.method == "POST":
+        teamList = request.form.get('hiddenTeams')
+        statList = request.form.get('hiddenStats')
+        teamList = json.loads(teamList)
+        statList = json.loads(statList)
+        print(teamList)
+        print(statList)
+        return redirect("/sustainability")
+    
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)

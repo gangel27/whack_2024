@@ -5,10 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CCFC Data Analysis</title>
         <script src='/static/js/jquery-3.7.1.min.js'></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/test.css" type="text/css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-        <style></style>
     </head>
     <body>
         {% include "header.html" %}
@@ -16,42 +14,59 @@
             <h1>Team Comparison</h1>
         </center>
             <div></div><br>
-            <form class="filter" id="filter" method="POST" action="/filters" enctype="multipart/form-data">
-                <left>
-                    <label for="team1">Bournemouth </label><br>
+            <div class="left">
+                <p>Filter Teams</p>
+            </div>
+            <div class="right">
+                <p>Filter Stats</p>
+            </div>
+            <form class="filter" id="filter" method="POST" onsubmit="submitForm()" action="/filter" enctype="multipart/form-data">
+                <div class="left">
                     <input class="team" type="checkbox" id="team1" name="team1" value="Bournemouth">
-                </left>
-                <right>
-                    <input class="stat" type="checkbox" id="stat1" name="stat1" value="Distance"><br>
-                    <label for="stat1"> Distance</label>
-                </right>
+                    <label for="team1">Bournemouth</label>
+                </div>
+                <div class="right">
+                    <label for="stat1">Distance</label>
+                    <input class="stat" type="checkbox" id="stat1" name="stat1" value="Distance">    
+                </div>
 
-                <br>
-
-                <left>
-                    <label for="team2">Reading </label><br>
+                <div class="left">
                     <input class="team" type="checkbox" id="team2" name="team2" value="Reading">
-                </left>
-                <right>
-                    <input class="stat" type="checkbox" id="stat2" name="stat2" value="HSR"><br>
-                    <label for="stat2"> HSR</label>
-                </right>
+                    <label for="team2">Reading</label>   
+                </div>
+                <div class="right">
+                    <label for="stat2">HSR</label>
+                    <input class="stat" type="checkbox" id="stat2" name="stat2" value="HSR">  
+                </div>
 
-                <br>
-
-                <left>
-                    <label for="team3">Middlesbrough </label><br>
+                <div class="left">
                     <input class="team" type="checkbox" id="team3" name="team3" value="Middlesbrough">
-                </left>
-                <right>
-                    <input class="stat" type="checkbox" id="stat3" name="stat3" value="Sprints"><br>
-                    <label for="stat3"> Sprints</label>
-                </right>
-
-                <br>
+                    <label for="team3">Middlesbrough</label>
+                </div>
+                <div class="right">
+                    <label for="stat3">Sprints</label>
+                    <input class="stat" type="checkbox" id="stat3" name="stat3" value="Sprints">
+                </div>
                 
-                
+                <br><input id="send" type="submit" value="Filter Results">
             </form>
+            <script>
+                function submitForm() {
+                    const teams = Array.from(document.querySelectorAll('.team')).map(input => input.value);
+                    const hiddenTeams = document.createElement('hiddenTeams');
+                    hiddenTeams.type = "hidden";
+                    hiddenTeams.name = "teamList";
+                    hiddenTeams.value = JSON.stringify(teams);
+                    document.getElementById('filter').appendChild(hiddenTeams);
+                    
+                    const stats = Array.from(document.querySelectorAll('.stat')).map(input => input.value);
+                    const hiddenStats = document.createElement('hiddenStats');
+                    hiddenStats.type = "hidden";
+                    hiddenStats.name = "statList";
+                    hiddenStats.value = JSON.stringify(stats);
+                    document.getElementById('filter').appendChild(hiddenStats);
+                }
+            </script>
             <div id="img"></div>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
