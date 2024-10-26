@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pearsonr
 
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
 # Initialize OpenRouteService client with your API key
 API_KEY = 'AIzaSyBGxmBxWKzk5l61JirnnpHFA9dakZD0cjI'
 cli = gmaps.Client(key=API_KEY)

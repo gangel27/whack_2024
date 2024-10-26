@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+
 # Define the path to the CSV file
 csv_file_path = './CCFC_match_lineups_data.csv'
 
