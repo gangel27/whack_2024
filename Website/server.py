@@ -36,7 +36,10 @@ def predict():
     if request.method == "POST":
         opposition = request.form['opposition']
         place = request.form['place']
+        playerList = request.form.get('inputList')
+        playerList = json.loads(playerList)
         print(opposition)
+        print(playerList)
         print(place)
         return redirect("/comparison")
     

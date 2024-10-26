@@ -14,7 +14,7 @@
         <center>
             <h1>Match Win Predictor</h1>
             <div></div><br>
-            <form class="predict" method="POST" action="/predict" enctype="multipart/form-data">
+            <form class="predict" id="predict" method="POST" onsubmit="submitForm()" action="/predict" enctype="multipart/form-data">
                 
                 <label for="opposition">Opposition</label><br>
                 <select name="opposition" required>
@@ -58,7 +58,13 @@
             </form>
             <script>
                 function submitForm() {
-                    
+                    const inputs = Array.from(document.querySelectorAll('.player')).map(input => input.value);
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = "hidden";
+                    hiddenInput.name = "inputList";
+                    hiddenInput.value = JSON.stringify(inputs);
+                    document.getElementById('predict').appendChild(hiddenInput);
+                    document.getElementById('myForm').submit();
                 }
             </script>
             <div id="img"></div>
