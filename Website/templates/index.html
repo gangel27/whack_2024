@@ -13,17 +13,20 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-dark text-light">
     {% include "header.html" %}
-    <center>
-        <h1>Coventry City FC - Data Analysis</h1>
+    <div class="container-fluid text-center pt-5 bg-dark text-light mb-0">
+        <div class="title">
+            <h1>Coventry City FC - Data Analysis</h1>
+        </div>
+
         <div></div><br>
         <p>{{ name }}</p>
 
         <img src="data:image/png;base64,{{chart_data}}" alt="Data not found" height="auto" width="auto">
         <div id="img"></div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-    </center>
+    </div>
 </body>
 
 </html>
