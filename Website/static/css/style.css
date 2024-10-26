@@ -14,6 +14,10 @@ body {
     color: aliceblue;
 }
 
+input[type='radio'] {
+    accent-color: #232323;
+}
+
 #logo {
     z-index: 3;
 }
