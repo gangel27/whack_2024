@@ -1,9 +1,9 @@
 import pandas as pd
-import openrouteservice as ors
+import googlemaps as gmaps
 
 # Initialize OpenRouteService client with your API key
-API_KEY = '5b3ce3597851110001cf6248bcf2b097e78944ab8ed10b34463e040f'
-cli = ors.Client(key=API_KEY)
+API_KEY = 'AIzaSyBGxmBxWKzk5l61JirnnpHFA9dakZD0cjI'
+cli = gmaps.Client(key=API_KEY)
 
 #Coventry City’s stadium location (latitude, longitude)
 coventry_stadium_coords = (52.4481, -1.4944)
@@ -110,36 +110,30 @@ opponent_stadium_data = {
 # Convert data to DataFrame
 opponent_stadium_data_df = pd.DataFrame(opponent_stadium_data)
 
-# Function to calculate distance and duration using ORS
-def calculate_distance_duration(origin_coords, destination_coords):
-    try:
-        route = cli.directions(
-            coordinates=[origin_coords, destination_coords],
-            profile='driving-car',
-            format='json'
-        )
-        distance_meters = route['routes'][0]['summary']['distance']  # in meters
-        duration_seconds = route['routes'][0]['summary']['duration']  # in seconds
-        return distance_meters, duration_seconds / 60  # duration in minutes
-    except Exception as e:
-        print(f"Error calculating route: {e}")
-        return None, None
+# Function to calculate distances from the origin to a list of destinations
+def calculate_distances(origin, destinations):
+    results = []
+    # Batch the destinations into groups of 10 to get around the 10 origins - 10 destinatons request dimension limit
+    for i in range(0, len(destinations), 10):
+        batch = destinations[i : i + 10]
+        # Perform the Distance Matrix API request
+        result = cli.distance_matrix(origins=origin, destinations=batch, mode="driving")
+        results.extend(result['rows'][0]['elements'])
+    
+    return results
+    
+    # Extract distances and durations
+    distances = []
+    durations = []
 
-# Add distance and travel time columns to DataFrame
-distances = []
-durations = []
 
-for index, row in opponent_stadium_data_df.iterrows():
-    opponent_coords = row['Opponent_Stadium_Coordinates']
-    distance, duration = calculate_distance_duration(coventry_stadium_coords, opponent_coords)
-    distances.append(distance)
-    durations.append(duration)
+# Calculate distances and durations
+distances = calculate_distances(coventry_stadium_coords, opponent_stadium_data_df['Opponent_Stadium_Coordinates'])
 
 # Append calculated data to the DataFrame
 opponent_stadium_data_df['Distance from Coventry (meters)'] = distances
-opponent_stadium_data_df['Travel Time (minutes)'] = durations
+for i, result in enumerate(distances):
+    print(f"Distance to {opponent_stadium_data_df['Opponent_Stadium_Coordinates'][i]}: {result['distance']['text']}, Duration: {result['duration']['text']}")
 
-# Save to CSV
-opponent_stadium_data_df.to_csv('coventry_travel_distances_ors.csv', index=False)
-
-print("Dataset created and saved as 'coventry_travel_distances_ors.csv'")
+# Print the results
+print(opponent_stadium_data_df)
