@@ -16,7 +16,7 @@ if torch.cuda.is_available():
 else:
     device = "cpu"
 
-device = "mps"
+# device = "mps"
 
 class SimpleModel(nn.Module):
     def __init__(self, input_size=90, hidden_size=128, output_size=3):
@@ -137,7 +137,7 @@ class Integration:
         optimizer = optim.Adam(self.model.parameters(), lr=0.001)
 
         # Load the model and optimizer states
-        checkpoint = torch.load(model_path)
+        checkpoint = torch.load(model_path, map_location=device)
         self.model.load_state_dict(checkpoint["model_state_dict"])
         optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
 
