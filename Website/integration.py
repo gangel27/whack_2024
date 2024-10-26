@@ -10,11 +10,8 @@ t = "Barnsley"
 
 model_path = "../George/Models/first_model.pth"
 
-device = (
-    "cuda"
-    if torch.cuda.is_available()
-    else "mps" if torch.backends.mps.is_available() else "cpu"
-)
+
+device = ("cpu")
 
 
 class SimpleModel(nn.Module):
@@ -191,5 +188,5 @@ class Integration:
         return probabilities
 
 
-X = Integration(t, p, "home")
-print(X.predict())
+# X = Integration(t, p, "home")
+# print(X.predict())
