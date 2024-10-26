@@ -1,6 +1,8 @@
 import pandas as pd
 import googlemaps as gmaps
-
+import matplotlib.pyplot as plt
+import numpy as np
+import pearsonr
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
@@ -156,4 +158,31 @@ awayMatches_df = awayMatches_df.reset_index()
 distacneAlone_df = distancesAlone_df.reset_index()
 
 awayMatches_df['Commute'] = distancesAlone_df.values
-print(awayMatches_df[['opposition_team','Commute']])
+#print(awayMatches_df[['opposition_team', 'Distance', 'Commute']])
+print(awayMatches_df['Commute'].sum())
+
+#Using the fact that NaN != Nan to filter out rows that have NULL Distance values
+am = awayMatches_df.query('Distance == Distance')[['opposition_team', 'Distance', 'Commute']]
+
+#A Scatter Plot of Commute vs The distance that players ran during games
+plt.scatter(am['Distance'], am['Commute'], label = 'Data Points', alpha = 0.8)
+
+# Calculate, and plot the regression line
+m, b = np.polyfit(am['Distance'], am['Commute'], 1)
+reg = f"y = {m : .1f}x + {b : .1f}"
+plt.plot(am['Distance'], m * am['Distance'] + b, color = 'red', label = 'Regression Line', alpha = 1)
+
+# Calculate the PMCC and p value
+pmcc, p = pearsonr.pearsonr(am['Distance'], am['Commute'])
+
+# Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
+plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance of the players'.title())
+plt.xlabel('Distance')
+plt.ylabel('Commute')
+plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+plt.legend()
+
+# Showing the graph
+plt.show()
