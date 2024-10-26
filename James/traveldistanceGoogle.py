@@ -1,6 +1,9 @@
 import pandas as pd
 import googlemaps as gmaps
 
+
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
 # Initialize OpenRouteService client with your API key
 API_KEY = 'AIzaSyBGxmBxWKzk5l61JirnnpHFA9dakZD0cjI'
 cli = gmaps.Client(key=API_KEY)
@@ -122,18 +125,26 @@ def calculate_distances(origin, destinations):
     
     return results
     
-    # Extract distances and durations
-    distances = []
-    durations = []
-
-
 # Calculate distances and durations
 distances = calculate_distances(coventry_stadium_coords, opponent_stadium_data_df['Opponent_Stadium_Coordinates'])
+distances_df = pd.DataFrame(distances)
+distancesAlone_df = (distances_df['distance'].apply(lambda x: x['value']))
 
 # Append calculated data to the DataFrame
-opponent_stadium_data_df['Distance from Coventry (meters)'] = distances
-for i, result in enumerate(distances):
-    print(f"Distance to {opponent_stadium_data_df['Opponent_Stadium_Coordinates'][i]}: {result['distance']['text']}, Duration: {result['duration']['text']}")
+# opponent_stadium_data_df['Distance from Coventry (meters)'] = distances
+# for i, result in enumerate(distances):
+#     print(f"Distance to {opponent_stadium_data_df['Opponent_Stadium_Coordinates'][i]}: {result['distance']['text']}, Duration: {result['duration']['text']}")
 
-# Print the results
-print(opponent_stadium_data_df)
+# # Print the results
+# print(opponent_stadium_data_df.head())
+
+csv_file_path = './CCFC_match_lineups_data.csv'
+overall_df = pd.dataframe = pd.read_csv(csv_file_path)
+
+awayMatches_df = overall_df[overall_df.location == "away"]
+print(awayMatches_df.reset_index()['opposition_team'])
+
+print(distancesAlone_df.reset_index())
+
+#awayMatches_df['Commute'] = distancesAlone_df.values
+#print(awayMatches_df[['opposition_team','distance']])
