@@ -28,6 +28,7 @@ opponent_stadium_data = {
         (51.63136151120107, -0.8003533423807407), #Wycombe Wanderers
         (53.411564190680394, -1.5006868344794106), #Sheff Wed
         (53.772563782819255, -2.6884375622640664), #PNE
+        (52.62218834093488, 1.3091125096855423), #Norwich
         (51.4870229876299, -0.05084635802115084), #Millwall
         (51.42257470503287, -0.9826389072904965), #Reading
         (52.47583788238037, -1.8680828286532856), #Birmingham City
@@ -41,6 +42,7 @@ opponent_stadium_data = {
         (52.988275303354676, -2.176215994824261), #Stoke
         (53.65441572847847, -1.7682946153763444), #Huddersfield
         (53.55244175289766, -1.467708650287881), #Barnsley
+        (53.805576443544375, -3.0493753965801154), #Blackpool
         (51.5094888169521, -0.2321485562912954), #QPR
         (51.4870229876299, -0.05084635802115084), #Millwall
         (51.88445521216652, -0.43175535579731544), #Luton
@@ -82,6 +84,13 @@ opponent_stadium_data = {
         (53.65441572847847, -1.7682946153763444), #Huddersfield
         (53.5478180452599, -2.654100508758006), #Wigan
         (53.805576443544375, -3.0493753965801154), #Blackpool
+        (51.642956098962756, -3.93455699513681), #Swansea
+        (51.5094888169521, -0.2321485562912954), #QPR
+        (53.728889832697206, -2.4891047981981433), #Blackburn Rovers
+        (54.57829568503369, -1.2168904442113437), #Middlesborough
+        (54.57829568503369, -1.2168904442113437), #Middlesborough
+        (52.62051600806496, -1.142232415497442), #Leicester
+        (51.43164003315739, -0.18668710010931702), #Wimbledon
         (51.642956098962756, -3.93455699513681), #Swansea
         (53.746143815707526, -0.3680872151387129), #Hull
         (51.47296417372802, -3.2030128423589277), #Cardiff
@@ -142,9 +151,9 @@ csv_file_path = './CCFC_match_lineups_data.csv'
 overall_df = pd.dataframe = pd.read_csv(csv_file_path)
 
 awayMatches_df = overall_df[overall_df.location == "away"]
-print(awayMatches_df.reset_index()['opposition_team'])
+awayMatches_df = awayMatches_df.reset_index()
 
-print(distancesAlone_df.reset_index())
+distacneAlone_df = distancesAlone_df.reset_index()
 
-#awayMatches_df['Commute'] = distancesAlone_df.values
-#print(awayMatches_df[['opposition_team','distance']])
+awayMatches_df['Commute'] = distancesAlone_df.values
+print(awayMatches_df[['opposition_team','Commute']])
