@@ -33,10 +33,13 @@ def sustainability():
 
 @app.route("/predict", methods=["POST", "GET"])
 def predict():
-    opposition = request.form['opposition']
-    place = request.form['place']
-    print(opposition)
-    print(place)
+    if request.method == "POST":
+        opposition = request.form['opposition']
+        place = request.form['place']
+        print(opposition)
+        print(place)
+        return redirect("/comparison")
+    
     return redirect("/")
 
 
