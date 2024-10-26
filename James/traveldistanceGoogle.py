@@ -176,7 +176,7 @@ plt.plot(am['Distance'], m * am['Distance'] + b, color = 'red', label = 'Regress
 pmcc, p = pearsonr.pearsonr(am['Distance'], am['Commute'])
 
 # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
-plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance of the players'.title())
+plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance traveled by the players during the match'.title())
 plt.xlabel('Distance')
 plt.ylabel('Commute')
 plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
@@ -184,5 +184,7 @@ plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'le
 plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
 plt.legend()
 
+#Storing the graph inside of a file
+plt.savefig("distance-commute-scatter.png", dpi=300, bbox_inches='tight')
 # Showing the graph
 plt.show()
