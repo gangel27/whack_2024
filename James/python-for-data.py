@@ -18,3 +18,12 @@ main_df = elements_df[['web_name','first_name','team','element_type','now_cost',
 
 print(element_types_df.head())
 print(teams_df.head())
+
+#create new dictionary
+games_played = [['Arsenal','4'], ['Aston Villa','3'], ['Brighton','4'], ['Burnley','3'], ['Chelsea','4'], ['Crystal Palace','4'], ['Everton','4'], ['Fulham','4'], ['Leicester','4'], ['Leeds','4'], ['Liverpool','4'], ['Man City','3'], ['Man Utd','3'], ['Newcastle','4'], ['Sheffield Utd','4'], ['Southampton','4'], ['Spurs','4'], ['West Brom','4'], ['West Ham','4'], ['Wolves','4']]
+#turn into a DataFrame
+played_df = pd.DataFrame(games_played,columns=['team','games_played'])
+#overwrite existing DataFrame column
+teams_df['played'] = played_df['games_played'].astype(str).astype(int)
+#voila
+print(teams_df.head())
