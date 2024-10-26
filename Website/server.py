@@ -25,7 +25,7 @@ def predictor():
 
 @app.route("/comparison")
 def comparison():
-    return render_template("index.html")
+    return render_template("comparison.html")
 
 @app.route("/sustainability")
 def sustainability():
