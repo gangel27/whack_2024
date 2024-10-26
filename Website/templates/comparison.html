@@ -52,14 +52,14 @@
             </form>
             <script>
                 function submitForm() {
-                    const teams = Array.from(document.querySelectorAll('.team')).map(input => input.value);
+                    const teams = Array.from(document.querySelectorAll('.team:checked')).map(input => input.value);
                     const hiddenTeams = document.createElement('hiddenTeams');
                     hiddenTeams.type = "hidden";
                     hiddenTeams.name = "teamList";
                     hiddenTeams.value = JSON.stringify(teams);
                     document.getElementById('filter').appendChild(hiddenTeams);
                     
-                    const stats = Array.from(document.querySelectorAll('.stat')).map(input => input.value);
+                    const stats = Array.from(document.querySelectorAll('.stat:checked')).map(input => input.value);
                     const hiddenStats = document.createElement('hiddenStats');
                     hiddenStats.type = "hidden";
                     hiddenStats.name = "statList";
