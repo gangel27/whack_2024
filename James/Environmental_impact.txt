@@ -1,0 +1,17 @@
+Coventry City Football Club played 101 competitive matches away from home between the 12th September 2020
+to 4th May 2024. If we assume that the minimum number of away fans that the championship require to 
+be allowed to buy tickets went to those games (2000) and they all drove from the midpoint of coventry's
+stadium to the midpoint of the opposing team's stadium, Coventry City's away games resulted in
+34770468km being travelled. If we assume that the everyone drove in groups of 3 in cars that had 
+average fuel efficiency for cars being driven in the UK (45 miles per gallon - 
+https://www.swanswaygarages.com/blog/what-is-a-good-mpg-for-a-used-car-in-the-uk/), the team's
+away game commuting has resulted in 258000 (257559.0 - 10.9kg of CO2 per gallon:
+https://www.carbonindependent.org/17.html)
+gallons of fuel being burned - emitting almost 3 million (2807393.1) kilograms of carbon dioxide into the atmosphere. This leads to increased
+global average temperatures, rising sea levels and an increase in the rate of extreme weather events.
+With climate change and general sustainability being global concerns in this modern age - with many
+countries around the world aiming to be carbon-neutral by 2050 (https://climateactiontracker.org/global/cat-net-zero-target-evaluations/),
+it would be suiting for a club thinking far into the future to try and get these numbers down. Possible
+suggests include desginated bus fleet for fans of the clubs to get on to go to away games, or maybe the
+introduction of a car-sharing platform for coventry city fans.
+

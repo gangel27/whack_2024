@@ -1,0 +1,8 @@
+Dumb Shiii I had to go through to get only as far as I've gotten
+Manually finding the coordinates of every football stadium that coventry had to play at
+Tried using the open-source map api openroute service but it complained that since I got the coordinates manually from
+google maps for all 91 away games in the middle of the stadium, it complained that there were "no routable points
+within 350m of the coordinates" I had provided and threw errors
+Switched to the google maps distance matrix api and then had to divide the 1 origin and 91 destinations into
+batches to get around the 10 origins, 10 destinations request limit
+Now it finally appears to be working

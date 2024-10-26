@@ -11,7 +11,7 @@ t = "Barnsley"
 model_path = "../George/Models/first_model.pth"
 
 
-device = ("cpu")
+device = "cpu"
 
 
 class SimpleModel(nn.Module):
