@@ -388,7 +388,7 @@ def commuteAvgPoints(dframe):
     pmcc, p = pearsonr.pearsonr(am['Commute'], amProcessed_clean['PPG'])
     fsize = 12
 
-    plt.xticks(rotation = 45)
+    plt.xticks(rotation = 45) #rotates the bar chart labels so that they aren't all overlapping each other
     plt.xlabel('Commute Distance(km)')
     plt.ylabel('Points Per Game')
     plt.text(x = 0.01, y = 0.95, s = f"PMCC = {pmcc : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = plt.gca().transAxes)
