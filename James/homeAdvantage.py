@@ -3,12 +3,13 @@ import googlemaps as gmaps
 import matplotlib.pyplot as plt
 import numpy as np
 import pearsonr
+import math
 
 def addCommuteToDataFrame():
     # Initialising the Google Maps Distance Matrix API
     API_KEY = 'AIzaSyBGxmBxWKzk5l61JirnnpHFA9dakZD0cjI'
     cli = gmaps.Client(key=API_KEY)
-
+    
     coventry_stadium_coords = (52.4481, -1.4944)
 
     opponent_stadium_data = {
@@ -159,23 +160,23 @@ def distanceCommuteScatterGraph(dframe):
 
     #A Scatter Plot of Commute vs The distance that players ran during games
     plt.figure()
-    plt.scatter(am['Commute'], am['Distance'], label = 'Data Points', alpha = 0.8)
+    plt.scatter(am['Distance'], am['Commute'], label = 'Data Points', alpha = 0.8)
 
     # Calculate, and plot the regression line
-    m, b = np.polyfit(am['Commute'], am['Distance'], 1)
+    m, b = np.polyfit(am['Distance'], am['Commute'], 1)
     reg = f"y = {m : .1f}x + {b : .1f}"
-    plt.plot(am['Commute'], m * am['Commute'] + b, color = 'red', label = 'Regression Line', alpha = 1)
+    plt.plot(am['Distance'], m * am['Distance'] + b, color = 'red', label = 'Regression Line', alpha = 1)
 
     # Calculate the PMCC and p value
-    pmcc, p = pearsonr.pearsonr(am['Commute'], am['Distance'])
+    pmcc, p = pearsonr.pearsonr(am['Distance'], am['Commute'])
 
     # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
     plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance traveled by the players during the match'.title())
-    plt.xlabel('Comute(m)')
-    plt.ylabel('Distance(m)')
-    plt.text(x = 0.05, y = 0.96, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-    plt.text(x = 0.05, y = 0.87, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-    plt.text(x = 0.05, y = 0.83, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    plt.xlabel('Distance')
+    plt.ylabel('Commute')
+    plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
     plt.legend()
 
     #Storing the graph inside of a file
@@ -391,15 +392,16 @@ def commuteAvgPoints(dframe):
     plt.text(x = 0.01, y = 0.90, s = f"p = {p : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = plt.gca().transAxes)
     plt.title('Bar Chart of Commute distance vs points per game'.title())
     plt.legend()
+    plt.savefig("commute-ppg-bar2.png", dpi=300, bbox_inches='tight')
+    plt.show
 
-    plt.savefig("commute-ppg-bar.png", dpi=300, bbox_inches='tight')
 
 
 
 awayMatches_df = addCommuteToDataFrame()
 awayMatches_df_clean = awayMatches_df.dropna()
-distanceCommuteScatterGraph(awayMatches_df_clean)
-hsrAndSprintsCommitScatterGraph(awayMatches_df_clean)
-xgToCommuteScatterGraph(awayMatches_df_clean)
-goalsToCommuteScatterGraph(awayMatches_df_clean)
+#distanceCommuteScatterGraph(awayMatches_df_clean)
+#hsrAndSprintsCommitScatterGraph(awayMatches_df_clean)
+#xgToCommuteScatterGraph(awayMatches_df_clean)
+#goalsToCommuteScatterGraph(awayMatches_df_clean)
 commuteAvgPoints(awayMatches_df_clean)
