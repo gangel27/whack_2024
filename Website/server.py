@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 import matplotlib
 from integration import Integration
 import numpy as np
 import json
+import csv
+import pandas as pd
 
 import matplotlib.pyplot as plt
 import io
@@ -31,6 +33,30 @@ def index():
 def predictor():
     return render_template("predictor.html")
 
+def load_fixtures():
+    CSV_FILE_PATH = '../data/CCFC_match_lineups_data_unaligned.csv'
+    df = pd.read_csv(CSV_FILE_PATH, skip_blank_lines=True)
+    
+    # Ensure that only rows with complete game data are kept
+    df = df.dropna(how='any')
+    
+    # Select the columns that are required
+    df = df[['date', 'Opposition', 'goals_scored', 'goals_conceded', 'shots', 'shots_on_target', 'fouls', 'possession']]
+    fixtures_data = df.to_dict(orient='records')
+    return fixtures_data
+
+
+@app.route("/fixtures")
+def fixtures():
+    return render_template("fixtures.html")
+
+@app.route("/getfixturedata", methods=["POST", "GET"])
+def getFixtureData():
+    try:
+        fixtures_data = load_fixtures()
+        return jsonify(fixtures_data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route("/comparison")
 def comparison():
