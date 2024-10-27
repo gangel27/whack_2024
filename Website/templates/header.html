@@ -1,8 +1,30 @@
 <!-- <div id='logo' class="w-50 z-3 pe-none pl-5 pt-3">
     <img style="max-width: 100px;" class='img z-0 w-25 position-relative z-3' src="./static/images/ccfci.png">
 </div> -->
+<style>
+    a {
+        transition: all 1s ease;
+    }
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark py-3">
+    a:hover {
+        /* font-family: Arial, Helvetica, sans-serif; */
+        /* background-color: red; */
+        color: #059DD9 !important;
+        transition: all 1s ease;
+        transform: scale(1.05)
+    }
+
+    nav {
+        background-color: #252525 !important;
+        opacity: 0.8;
+    }
+
+    .blue_border {
+        border: 1px solid #059DD9 !important;
+    }
+</style>
+
+<nav class="navbar navbar-expand-md navbar-dark py-3">
     <div class="container-fluid">
         <a style="transform: translateX(100px);" href="/" class="navbar-brand position-relative"><img
                 class="img-fluid w-50" src="./static/images/ccfci.png" alt=""></a>
@@ -19,23 +41,23 @@
             <ul class="navbar-nav ms-auto lead">
                 <ul class="navbar-nav ms-auto lead">
                     <li class="nav-item px-5 ">
-                        <a href="/" class="nav-link">Home</a>
+                        <a id='home' href="/" class="nav-link">Home</a>
                     </li>
 
                     <li class="nav-item px-5 ">
-                        <a href="/predictor" class="nav-link">Predictor</a>
+                        <a id='pred' href="/predictor" class="nav-link">Predictor</a>
                     </li>
 
                     <li class="nav-item px-5 ">
-                        <a href="/comparison" class="nav-link">Compare</a>
+                        <a id='comp' href="/comparison" class="nav-link">Compare</a>
                     </li>
 
                     <li class="nav-item px-5 ">
-                        <a href="/sustainability" class="nav-link">Sustainability</a>
+                        <a id='sus' href="/sustainability" class="nav-link">Sustainability</a>
                     </li>
 
                     <li class="nav-item px-5 ">
-                        <a href="/fixtures" class="nav-link">Past Fixtures</a>
+                        <a id='fix' href="/fixtures" class="nav-link">Past Fixtures</a>
                     </li>
                 </ul>
             </ul>
