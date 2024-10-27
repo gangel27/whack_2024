@@ -31,16 +31,21 @@
             justify-content: space-between;
             align-items: center;
             margin: 40px 0;
-            margin-top: 60px;
-            margin-bottom: 60px;
+            margin-top: 8%;
+            margin-bottom: 8%;
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
+            transform: translateY(80px);
+            transition: all 1.4s ease;
+        }
+
+        .section:first-child {
+            margin-top: 60px;
         }
 
         .text {
             border: 2px solid white;
             border-radius: 1vw;
+            box-shadow: 0 0 12px #f0f, 0 0 12px #0ff;
         }
         .section img {
             width: 100%;
@@ -91,21 +96,6 @@
             visibility: visible;
         }
 
-        .left .text.visible {
-            transform: translateX(-50px);
-        }
-
-        .left .image.visible {
-            transform: translateX(50px);
-        }
-
-        .right .text.visible {
-            transform: translateX(50px);
-        }
-
-        .right .image.visible {
-            transform: translateX(-50px);
-        }
     </style>
     </head>
 
@@ -180,6 +170,17 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi recusandae cumque alias blanditiis fugiat officiis? Possimus accusamus exercitationem recusandae quibusdam nisi molestias itaque explicabo. Maiores nulla ducimus impedit sunt harum? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam unde beatae laudantium at sequi, dolorem quia nulla aut blanditiis dolores architecto ipsum sit modi? Dolorum quis perspiciatis sit magnam necessitatibus?</p>
               </div>
             </div>
+
+            <!-- Section 5 -->
+            <div class="section fade-in left">
+                <div class="text">
+                  <h2>Heading 5</h2>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate minima architecto tenetur, natus ex aliquid voluptate vero commodi sapiente dolorem blanditiis unde, id, tempora maxime illum repellendus quibusdam aliquam repudiandae. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero quasi harum soluta distinctio vitae rem iure quisquam accusamus, aperiam cum alias minus dicta aut beatae quae sed in cupiditate amet!</p>
+                </div>
+                <div class="image">
+                  <img src="image5.jpg" alt="Image 5">
+                </div>
+              </div>
           </section>
         <!-- <img src="data:image/png;base64,{{chart_data}}" alt="Data not found" height="auto" width="auto"> -->
         <div id="img"></div>
