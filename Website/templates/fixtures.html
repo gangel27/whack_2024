@@ -65,15 +65,18 @@
         fetch('/getfixturedata')
             .then(response => response.json())
             .then(data => {
+
                 const navbar = document.getElementById('gamesNavbar');
                 const gameCard = document.getElementById('gameCard');
                 const gameStats = document.getElementById('gameStats');
                 let i = 1
                 data.forEach((game) => {
+                    value = 'A'
+                    if (game.location == "home") { value = "H" }
                     // Create a navbar item for each game
                     const navItem = document.createElement('button');
                     navItem.classList.add('btn', 'btn-dark', 'outline-light', 'bg-dark', 'text-light', 'rounded', 'width_');
-                    navItem.textContent = `${game.Opposition}`;
+                    navItem.textContent = `${game.Opposition} (${value})`;
                     navItem.onclick = () => displayGame(game, navItem);
                     navbar.appendChild(navItem);
                     i++;

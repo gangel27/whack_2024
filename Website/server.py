@@ -57,6 +57,7 @@ def load_fixtures():
             "shots_on_target",
             "fouls",
             "possession",
+            "location",
         ]
     ]
     fixtures_data = df.to_dict(orient="records")
