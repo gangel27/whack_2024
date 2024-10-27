@@ -192,8 +192,8 @@ def hsrAndSprintsCommitScatterGraph(dframe):
 
     #A Scatter Plot of Commute vs The distance that players ran during games between HSR and Sprints
     fig = plt.figure()
-    sfig1 = fig.add_subplot(2, 1, 1)
-    sfig2 = fig.add_subplot(2, 1, 2)
+    sfig1 = fig.add_subplot(2, 1, 2)
+    sfig2 = fig.add_subplot(2, 1, 1)
     sfig1.scatter(am['Commute'], am['HSR'], label = 'Data Points', alpha = 0.8)
     sfig2.scatter(am['Commute'], am['Sprint'], label = 'Data Points', alpha = 0.8)
 
@@ -208,24 +208,26 @@ def hsrAndSprintsCommitScatterGraph(dframe):
 
     # Calculate the PMCC and p values for the two graphs
     pmcc1, p1 = pearsonr.pearsonr(am['Commute'], am['HSR'])
-    pmcc2, p2 = pearsonr.pearsonr(am['Commute'], am['HSR'])
+    pmcc2, p2 = pearsonr.pearsonr(am['Commute'], am['Sprint'])
+
+    fsize = 12 #setting the font size
 
     # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the two graphs
     #sfig1.set_title('Commute Vs HSR'.title())
     sfig1.set_xlabel('Commute(m)')
     sfig1.set_ylabel('HSR Distance(m)')
-    sfig1.text(x = 0.01, y = 0.95, s = reg1, fontsize = 8, ha = 'left', va = 'top', transform = sfig1.transAxes)
-    sfig1.text(x = 0.01, y = 0.85, s = f"PMCC = {pmcc1 : .2f}", fontsize = 8, ha = 'left', va = 'top', transform = sfig1.transAxes)
-    sfig1.text(x = 0.01, y = 0.75, s = f"p = {p1 : .2f}", fontsize = 8, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    #sfig1.text(x = 0.01, y = 0.95, s = reg1, fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    sfig1.text(x = 0.01, y = 0.95, s = f"PMCC = {pmcc1 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    sfig1.text(x = 0.01, y = 0.85, s = f"p = {p1 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
     sfig1.legend()
 
     sfig2.set_title('Commute Vs Sprints'.title())
     sfig2.set_xlabel('Commute(m)')
     sfig2.set_ylabel('Sprint Distance(m)')
-    sfig2.text(x = 0.01, y = 0.95, s = reg2, fontsize = 8, ha = 'left', va = 'top', transform = sfig2.transAxes)
-    sfig2.text(x = 0.01, y = 0.85, s = f"PMCC = {pmcc2 : .2f}", fontsize = 8, ha = 'left', va = 'top', transform = sfig2.transAxes)
-    sfig2.text(x = 0.01, y = 0.75, s = f"p = {p2 : .2f}", fontsize = 8, ha = 'left', va = 'top', transform = sfig2.transAxes)
-    sfig2.legend()
+    #sfig2.text(x = 0.01, y = 0.95, s = reg2, fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    sfig2.text(x = 0.01, y = 0.95, s = f"PMCC = {pmcc2 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    sfig2.text(x = 0.01, y = 0.85, s = f"p = {p2 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    # sfig2.legend()
 
     #Setting the super-title of the two-graph figure
     fig.suptitle("Graphs showing the effect that commuting to a stadium has on movement speed".title())
