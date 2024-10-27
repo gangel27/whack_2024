@@ -12,7 +12,35 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
         integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
-</head>
+    <style>
+        #chart {
+            align-content: center;
+            height: 35%;
+            width: 30%;
+            transition: ease 1.2s;
+            margin-top: 50px;
+            padding: 0%;
+            padding-top: 5px;
+            border: none;
+        }
+        #chart:hover {
+            scale: 1.1;
+            transition: ease 1.2s;
+        }
+        .team:hover {
+            color:blanchedalmond;
+            scale: 1.05;
+            transition: ease 0.7s;
+            cursor: pointer;
+        }
+        .stat:hover {
+            color:blanchedalmond;
+            scale: 1.05;
+            transition: ease 0.7s;
+            cursor: pointer;
+        }
+    </style>
+    </head>
 
 <body>
     {% include "header.html" %}
@@ -242,7 +270,7 @@
                             <label for="team">Manchester United</label>
                         </div>
                     </div>
-                    <img height="auto" width="auto" class='col-4 overflow-visible' src="data:image/png;base64,{{chart}}" alt="">
+                    <img id="chart" height="auto" width="auto" class='col-4 overflow-visible' src="data:image/png;base64,{{chart}}" alt="">
                     <div class='text-end col-4 mr-0 pr-0' id="rightSide">
                         <div class="text-end d-flex flex-row-reverse justify-content-between mr-auto">
                             <h3 class="">Stats</h3>
