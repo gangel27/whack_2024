@@ -23,37 +23,40 @@
             padding-top: 5px;
             border: none;
         }
+
         #chart:hover {
             scale: 1.1;
             transition: ease 1.2s;
         }
+
         .team:hover {
-            color:blanchedalmond;
+            color: blanchedalmond;
             scale: 1.05;
             transition: ease 0.7s;
             cursor: pointer;
         }
+
         .stat:hover {
-            color:blanchedalmond;
+            color: blanchedalmond;
             scale: 1.05;
             transition: ease 0.7s;
             cursor: pointer;
         }
     </style>
-    </head>
+</head>
 
-<body>
+<body class="mx-0 px-0 bg-dark text-light">
     {% include "header.html" %}
-    <div class="container-fluid bg-dark text-light">
+    <div class="container-fluid bg-dark text-light ">
         <div class="container text-center pt-5">
             <div>
                 <h1>Team Comparison</h1>
             </div>
         </div>
 
-        <form class="filter" id="filter" method="POST" action="/filter" enctype="multipart/form-data">
-            <div class="container-fluid m-0 p-0">
-                <div class="container-fluid row pt-3 w-100 mr-0">
+        <form class="filter mx-0" id="filter" method="POST" action="/filter" enctype="multipart/form-data">
+            <div class="container w-100 px-0">
+                <div class="container row pt-3 w-100 mr-0">
                     <div class='text-start col-4' id="leftSide">
                         <div class="d-flex flex-row justify-content-between">
                             <h3 class="text-start">Filter Teams</h3>
@@ -64,7 +67,7 @@
                         </div>
 
                         <div class="left">
-                            <input class="team" type="checkbox" name="team" value="Millwall">
+                            <input checked class="team" type="checkbox" name="team" value="Millwall">
                             <label for="team">Millwall</label>
                         </div>
 
@@ -85,7 +88,7 @@
                         </div>
 
                         <div class="left">
-                            <input class="team" type="checkbox" name="team" value="Barnsley">
+                            <input checked class="team" type="checkbox" name="team" value="Barnsley">
                             <label for="team">Barnsley</label>
                         </div>
 
@@ -94,7 +97,7 @@
                             <label for="team">AFC Bournemouth</label>
                         </div>
 
-                        <div class="left">
+                        <div checked class="left">
                             <input class="team" type="checkbox" name="team" value="Brentford">
                             <label for="team">Brentford</label>
                         </div>
@@ -110,7 +113,7 @@
                         </div>
 
                         <div class="left">
-                            <input class="team" type="checkbox" name="team" value="Middlesbrough">
+                            <input checked class="team" type="checkbox" name="team" value="Middlesbrough">
                             <label for="team">Middlesbrough</label>
                         </div>
 
@@ -270,7 +273,13 @@
                             <label for="team">Manchester United</label>
                         </div>
                     </div>
-                    <img id="chart" height="auto" width="auto" class='col-4 overflow-visible' src="data:image/png;base64,{{chart}}" alt="">
+                    <div class='col-4 d-flex flex-column'>
+                        <input id="send" class="btn bg-dark text-light border-light mx-auto" type="submit"
+                            value="Filter Results">
+                        <img style="visibility: hidden;" id="chart" height="auto" width="auto"
+                            class='w-100 overflow-visible' src="data:image/png;base64,{{chart}}">
+                    </div>
+
                     <div class='text-end col-4 mr-0 pr-0' id="rightSide">
                         <div class="text-end d-flex flex-row-reverse justify-content-between mr-auto">
                             <h3 class="">Stats</h3>
@@ -278,27 +287,27 @@
 
                         <div class="right">
                             <label for="stat">Distance</label>
-                            <input class="stat" type="checkbox" name="stat" value="Distance">
+                            <input checked class="stat" type="checkbox" name="stat" value="Distance">
                         </div>
                         <div class="right">
                             <label for="stat">HSR</label>
-                            <input class="stat" type="checkbox" name="stat" value="HSR">
+                            <input checked class="stat" type="checkbox" name="stat" value="HSR">
                         </div>
                         <div class="right">
                             <label for="stat">Sprint</label>
-                            <input class="stat" type="checkbox" name="stat" value="Sprint">
+                            <input checked class="stat" type="checkbox" name="stat" value="Sprint">
                         </div>
                         <div class="right">
                             <label for="stat">Accelerations</label>
-                            <input class="stat" type="checkbox" name="stat" value="Accelerations">
+                            <input checked class="stat" type="checkbox" name="stat" value="Accelerations">
                         </div>
                         <div class="right">
                             <label for="stat">Decelerations</label>
-                            <input class="stat" type="checkbox" name="stat" value="Decelerations">
+                            <input checked class="stat" type="checkbox" name="stat" value="Decelerations">
                         </div>
                         <div class="right">
                             <label for="stat">Jumps</label>
-                            <input class="stat" type="checkbox" name="stat" value="Jumps">
+                            <input checked class="stat" type="checkbox" name="stat" value="Jumps">
                         </div>
                         <div class="right">
                             <label for="stat">Goals Scored</label>
@@ -441,17 +450,23 @@
                     </div>
                 </div>
 
-                <input id="send" type="submit" value="Filter Results">
+
             </div>
 
         </form>
 
 
-
-
     </div>
 
-
+    <script>
+        const img = document.getElementById('chart');
+        img.addEventListener('load', () => {
+            img.style.visibility = 'visible';
+        });
+        img.addEventListener('error', () => {
+            img.style.visibility = 'hidden';
+        });
+    </script>
     <script>
         function submitForm() {
             const teams = Array.from(document.querySelectorAll(".team:checked")).map(input => input.value);
