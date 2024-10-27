@@ -1,414 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CCFC Data Analysis</title>
-        <script src='/static/js/jquery-3.7.1.min.js'></script>
-        <link rel="stylesheet" href="/static/css/test.css" type="text/css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    </head>
-    <body>
-        {% include "header.html" %}
-        <center>
-            <h1>Team Comparison</h1>
-        </center>
-            <div></div><br>
-            <div class="left">
-                <p>Filter Teams</p>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCFC Data Analysis</title>
+    <script src='/static/js/jquery-3.7.1.min.js'></script>
+    <link rel="stylesheet" href="/static/css/test.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+        integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+</head>
+
+<body>
+    {% include "header.html" %}
+    <div class="container-fluid bg-dark text-light">
+        <div class="container text-center pt-5">
+            <div>
+                <h1>Team Comparison</h1>
             </div>
-            <div class="right">
-                <p>Filter Stats</p>
-            </div>
-            <form class="filter" id="filter" method="POST" action="/filter" enctype="multipart/form-data">
-                <div id="leftSide">
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="MK Dons">
-                        <label for="team">MK Dons</label>
-                    </div>
-                
+        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Bristol City">
-                        <label for="team">Bristol City</label>
-                    </div>
+        <form class="filter" id="filter" method="POST" action="/filter" enctype="multipart/form-data">
+            <div class="container m-0 p-0">
+                <div class="container row pt-3 w-100">
+                    <div class='text-start col-2' id="leftSide">
+                        <h3 class="text-start">Filter Teams</h3>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="MK Dons">
+                            <label for="team">MK Dons</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Gillingham">
-                        <label for="team">Gillingham</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Millwall">
+                            <label for="team">Millwall</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Queen Park Rangers">
-                        <label for="team">Queen Park Rangers</label>
-                    </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Barnsley">
-                        <label for="team">Barnsley</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Bristol City">
+                            <label for="team">Bristol City</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="AFC Bournemouth">
-                        <label for="team">AFC Bournemouth</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Gillingham">
+                            <label for="team">Gillingham</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Brentford">
-                        <label for="team">Brentford</label>
-                    </div>
-                                    
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Swansea City">
-                        <label for="team">Swansea City</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Queen Park Rangers">
+                            <label for="team">Queen Park Rangers</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Blackburn Rovers">
-                        <label for="team">Blackburn Rovers</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Barnsley">
+                            <label for="team">Barnsley</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Middlesbrough">
-                        <label for="team">Middlesbrough</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="AFC Bournemouth">
+                            <label for="team">AFC Bournemouth</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Reading">
-                        <label for="team">Reading</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Brentford">
+                            <label for="team">Brentford</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Nottingham Forest">
-                        <label for="team">Nottingham Forest</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Swansea City">
+                            <label for="team">Swansea City</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Watford">
-                        <label for="team">Watford</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Blackburn Rovers">
+                            <label for="team">Blackburn Rovers</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Birmingham City">
-                        <label for="team">Birmingham City</label>
-                    </div>
-                    
-                    <!--Again MF-->
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Cardiff City">
-                        <label for="team">Cardiff City</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Middlesbrough">
+                            <label for="team">Middlesbrough</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Norwich City">
-                        <label for="team">Norwich City</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Reading">
+                            <label for="team">Reading</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Derby County">
-                        <label for="team">Derby County</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Nottingham Forest">
+                            <label for="team">Nottingham Forest</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Rotherham United">
-                        <label for="team">Rotherham United</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Watford">
+                            <label for="team">Watford</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Luton Town">
-                        <label for="team">Luton Town</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Birmingham City">
+                            <label for="team">Birmingham City</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Wycombe Wanderers">
-                        <label for="team">Wycombe Wanderers</label>
-                    </div>
-                    
-                    <!--Again MF-->
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Huddersfield Town">
-                        <label for="team">Huddersfield Town</label>
-                    </div>
+                        <!--Again MF-->
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Cardiff City">
+                            <label for="team">Cardiff City</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Sheffield Wednesday">
-                        <label for="team">Sheffield Wednesday</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Norwich City">
+                            <label for="team">Norwich City</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Stoke City">
-                        <label for="team">Stoke City</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Derby County">
+                            <label for="team">Derby County</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Preston North End">
-                        <label for="team">Preston North End</label>
-                    </div>
-                    
-                    <!--Again MF-->
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Sheffield United">
-                        <label for="team">Sheffield United</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Rotherham United">
+                            <label for="team">Rotherham United</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Southampton">
-                        <label for="team">Southampton</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Luton Town">
+                            <label for="team">Luton Town</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Sunderland">
-                        <label for="team">Sunderland</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Wycombe Wanderers">
+                            <label for="team">Wycombe Wanderers</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Burnley">
-                        <label for="team">Burnley</label>
-                    </div>
+                        <!--Again MF-->
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Huddersfield Town">
+                            <label for="team">Huddersfield Town</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Wigan Athletic">
-                        <label for="team">Wigan Athletic</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Sheffield Wednesday">
+                            <label for="team">Sheffield Wednesday</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Wrexham">
-                        <label for="team">Wrexham</label>
-                    </div>
-                    
-                    <!--Again MF-->
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="West Bromwich Albion">
-                        <label for="team">West Bromwich Albion</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Stoke City">
+                            <label for="team">Stoke City</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Leicester City">
-                        <label for="team">Leicester City</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Preston North End">
+                            <label for="team">Preston North End</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="AFC Wimbledon">
-                        <label for="team">AFC Wimbledon</label>
-                    </div>
+                        <!--Again MF-->
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Sheffield United">
+                            <label for="team">Sheffield United</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Plymouth Argyle">
-                        <label for="team">Plymouth Argyle </label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Southampton">
+                            <label for="team">Southampton</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Ipswich Town">
-                        <label for="team">Ipswich Town</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Sunderland">
+                            <label for="team">Sunderland</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Leeds United">
-                        <label for="team">Leeds United</label>
-                    </div>
-                    
-                    <!--Again MF-->
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Oxford United">
-                        <label for="team">Oxford United</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Burnley">
+                            <label for="team">Burnley</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Maidstone United">
-                        <label for="team">Maidstone United</label>
-                    </div>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Wigan Athletic">
+                            <label for="team">Wigan Athletic</label>
+                        </div>
 
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Wolves">
-                        <label for="team">Wolves</label>
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Wrexham">
+                            <label for="team">Wrexham</label>
+                        </div>
+
+                        <!--Again MF-->
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="West Bromwich Albion">
+                            <label for="team">West Bromwich Albion</label>
+                        </div>
+
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Leicester City">
+                            <label for="team">Leicester City</label>
+                        </div>
+
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="AFC Wimbledon">
+                            <label for="team">AFC Wimbledon</label>
+                        </div>
+
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Plymouth Argyle">
+                            <label for="team">Plymouth Argyle </label>
+                        </div>
+
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Ipswich Town">
+                            <label for="team">Ipswich Town</label>
+                        </div>
+
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Leeds United">
+                            <label for="team">Leeds United</label>
+                        </div>
+
+                        <!--Again MF-->
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Oxford United">
+                            <label for="team">Oxford United</label>
+                        </div>
+
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Maidstone United">
+                            <label for="team">Maidstone United</label>
+                        </div>
+
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Wolves">
+                            <label for="team">Wolves</label>
+                        </div>
+
+                        <!--Again MF-->
+                        <div class="left">
+                            <input class="team" type="checkbox" name="team" value="Manchester United">
+                            <label for="team">Manchester United</label>
+                        </div>
                     </div>
-                    
-                    <!--Again MF-->
-                    <div class="left">
-                        <input class="team" type="checkbox" name="team" value="Manchester United">
-                        <label for="team">Manchester United</label>
+                    <img class='col-6' src="../images/ccfc.jpg" alt="fml">
+                    <div class='text-end col-4' id="rightSide">
+                        <h3 class="text-end">Stats</h3>
+                        <div class="right">
+                            <label for="stat">Distance</label>
+                            <input class="stat" type="checkbox" name="stat" value="Distance">
+                        </div>
+                        <div class="right">
+                            <label for="stat">HSR</label>
+                            <input class="stat" type="checkbox" name="stat" value="HSR">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Sprint</label>
+                            <input class="stat" type="checkbox" name="stat" value="Sprint">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Accelerations</label>
+                            <input class="stat" type="checkbox" name="stat" value="Accelerations">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Decelerations</label>
+                            <input class="stat" type="checkbox" name="stat" value="Decelerations">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Jumps</label>
+                            <input class="stat" type="checkbox" name="stat" value="Jumps">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Goals Scored</label>
+                            <input class="stat" type="checkbox" name="stat" value="goals_scored">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Goals Conceded</label>
+                            <input class="stat" type="checkbox" name="stat" value="goals_conceded">
+                        </div>
+                        <div class="right">
+                            <label for="stat">NP xG</label>
+                            <input class="stat" type="checkbox" name="stat" value="np_xg">
+                        </div>
+                        <div class="right">
+                            <label for="stat">NP xG Conceded</label>
+                            <input class="stat" type="checkbox" name="stat" value="np_xg_conceded">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Shots</label>
+                            <input class="stat" type="checkbox" name="stat" value="shots">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Shots on Target</label>
+                            <input class="stat" type="checkbox" name="stat" value="shots_on_target">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Oppo Shots</label>
+                            <input class="stat" type="checkbox" name="stat" value="opposition_shots">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Oppo Shots on Target</label>
+                            <input class="stat" type="checkbox" name="stat" value="opposition_shots_on_target">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Passes</label>
+                            <input class="stat" type="checkbox" name="stat" value="passes">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Oppo Passes</label>
+                            <input class="stat" type="checkbox" name="stat" value="opposition_passes">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Comp Passes into box</label>
+                            <input class="stat" type="checkbox" name="stat" value="completed_passes_into_the_box">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Pressures</label>
+                            <input class="stat" type="checkbox" name="stat" value="pressures">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Pressure Regains</label>
+                            <input class="stat" type="checkbox" name="stat" value="pressure_regains">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Fouls</label>
+                            <input class="stat" type="checkbox" name="stat" value="fouls">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Tackles</label>
+                            <input class="stat" type="checkbox" name="stat" value="tackles">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Yellow Cards</label>
+                            <input class="stat" type="checkbox" name="stat" value="yellow_cards">
+                        </div>
+                        <div class="right">
+                            <label for="stat">xG 8s of corner</label>
+                            <input class="stat" type="checkbox" name="stat" value="xg_within_8_seconds_of_corner">
+                        </div>
+                        <div class="right">
+                            <label for="stat">xG Conc. 8s of corner</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="xg_conceded_within_8_seconds_of_corner">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Shots 8s of a corner</label>
+                            <input class="stat" type="checkbox" name="stat" value="shots_within_8_seconds_of_corner">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Shots Conc 8s corner</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="shots_conceded_within_8_seconds_of_corner">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Goals 8s of a corner</label>
+                            <input class="stat" type="checkbox" name="stat" value="goals_within_8_seconds_of_corner">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Goals conc 8s corner</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="goals_conceded_within_8_seconds_of_corner">
+                        </div>
+                        <div class="right">
+                            <label for="stat">xG 8s of indir freekick</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="xg_within_8_seconds_of_indirect_free_kick">
+                        </div>
+                        <div class="right">
+                            <label for="stat">xG Conc 8s indir kick</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="xg_conceded_within_8_seconds_of_indirect_free_kick">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Shots 8s indir freekick</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="shots_within_8_seconds_of_indirect_free_kick">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Shots Conceded within 8s of an indirect freekick</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="shots_conceded_within_8_seconds_of_indirect_free_kick">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Goals within 8s of an indirect freekick</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="goals_within_8_seconds_of_indirect_free_kick">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Goals Conceded within 8s of an indirect freekick</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="goals_conceded_within_8_seconds_of_indirect_free_kick">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Possession</label>
+                            <input class="stat" type="checkbox" name="stat" value="possession">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Final Third Possession</label>
+                            <input class="stat" type="checkbox" name="stat" value="final_third_possession">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Passes per Defensive Action</label>
+                            <input class="stat" type="checkbox" name="stat" value="ppda">
+                        </div>
+                        <div class="right">
+                            <label for="stat">Completed Passes and Carried into Final Third</label>
+                            <input class="stat" type="checkbox" name="stat"
+                                value="completed_passes_and_carries_into_final_third">
+                        </div>
                     </div>
                 </div>
-                <div id="rightSide">   
-                    <div class="right">
-                        <label for="stat">Distance</label>
-                        <input class="stat" type="checkbox" name="stat" value="Distance">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">HSR</label>
-                        <input class="stat" type="checkbox" name="stat" value="HSR">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Sprint</label>
-                        <input class="stat" type="checkbox" name="stat" value="Sprint">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Accelerations</label>
-                        <input class="stat" type="checkbox" name="stat" value="Accelerations">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Decelerations</label>
-                        <input class="stat" type="checkbox" name="stat" value="Decelerations">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Jumps</label>
-                        <input class="stat" type="checkbox" name="stat" value="Jumps">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Goals Scored</label>
-                        <input class="stat" type="checkbox" name="stat" value="goals_scored">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Goals Conceded</label>
-                        <input class="stat" type="checkbox" name="stat" value="goals_conceded">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Non-Penalty xG</label>
-                        <input class="stat" type="checkbox" name="stat" value="np_xg">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Non-Penalty xG Conceded</label>
-                        <input class="stat" type="checkbox" name="stat" value="np_xg_conceded">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Shots</label>
-                        <input class="stat" type="checkbox" name="stat" value="shots">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Shots on Target</label>
-                        <input class="stat" type="checkbox" name="stat" value="shots_on_target">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Opposition Shots</label>
-                        <input class="stat" type="checkbox" name="stat" value="opposition_shots">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Opposition Shots on Target</label>
-                        <input class="stat" type="checkbox" name="stat" value="opposition_shots_on_target">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Passes</label>
-                        <input class="stat" type="checkbox" name="stat" value="passes">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Opposition Passes</label>
-                        <input class="stat" type="checkbox" name="stat" value="opposition_passes">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Completed Passes into box</label>
-                        <input class="stat" type="checkbox" name="stat" value="completed_passes_into_the_box">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Pressures</label>
-                        <input class="stat" type="checkbox" name="stat" value="pressures">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Pressure Regains</label>
-                        <input class="stat" type="checkbox" name="stat" value="pressure_regains">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Fouls</label>
-                        <input class="stat" type="checkbox" name="stat" value="fouls">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Tackles</label>
-                        <input class="stat" type="checkbox" name="stat" value="tackles">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Yellow Cards</label>
-                        <input class="stat" type="checkbox" name="stat" value="yellow_cards">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">xG within 8s of a corner</label>
-                        <input class="stat" type="checkbox" name="stat" value="xg_within_8_seconds_of_corner">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">xG Conceded within 8s of a corner</label>
-                        <input class="stat" type="checkbox" name="stat" value="xg_conceded_within_8_seconds_of_corner">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Shots within 8s of a corner</label>
-                        <input class="stat" type="checkbox" name="stat" value="shots_within_8_seconds_of_corner">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Shots Conceded within 8s of a corner</label>
-                        <input class="stat" type="checkbox" name="stat" value="shots_conceded_within_8_seconds_of_corner">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Goals within 8s of a corner</label>
-                        <input class="stat" type="checkbox" name="stat" value="goals_within_8_seconds_of_corner">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Goals Conceded within 8s of a corner</label>
-                        <input class="stat" type="checkbox" name="stat" value="goals_conceded_within_8_seconds_of_corner">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">xG within 8s of an indirect freekick</label>
-                        <input class="stat" type="checkbox" name="stat" value="xg_within_8_seconds_of_indirect_free_kick">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">xG Conceded within 8s of an indirect freekick</label>
-                        <input class="stat" type="checkbox" name="stat" value="xg_conceded_within_8_seconds_of_indirect_free_kick">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Shots within 8s of an indirect freekick</label>
-                        <input class="stat" type="checkbox" name="stat" value="shots_within_8_seconds_of_indirect_free_kick">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Shots Conceded within 8s of an indirect freekick</label>
-                        <input class="stat" type="checkbox" name="stat" value="shots_conceded_within_8_seconds_of_indirect_free_kick">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Goals within 8s of an indirect freekick</label>
-                        <input class="stat" type="checkbox" name="stat" value="goals_within_8_seconds_of_indirect_free_kick">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Goals Conceded within 8s of an indirect freekick</label>
-                        <input class="stat" type="checkbox" name="stat" value="goals_conceded_within_8_seconds_of_indirect_free_kick">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Possession</label>
-                        <input class="stat" type="checkbox" name="stat" value="possession">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Final Third Possession</label>
-                        <input class="stat" type="checkbox" name="stat" value="final_third_possession">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Passes per Defensive Action</label>
-                        <input class="stat" type="checkbox" name="stat" value="ppda">    
-                    </div>
-                    <div class="right">
-                        <label for="stat">Completed Passes and Carried into Final Third</label>
-                        <input class="stat" type="checkbox" name="stat" value="completed_passes_and_carries_into_final_third">    
-                    </div>
-                </div>
-                <br><input id="send" type="submit" value="Filter Results">
-            </form>
-            <script>
-                function submitForm() {
-                    const teams = Array.from(document.querySelectorAll(".team:checked")).map(input => input.value);
-                    console.log("teams");
-                    console.log(teams);
-                    const hiddenTeams = document.createElement('hiddenTeam');
-                    hiddenTeams.type = "hidden";
-                    hiddenTeams.name = "teamList";
-                    hiddenTeams.value = JSON.stringify(teams);
-                    const filteer = document.getElementById('filter');
-                    filteer.appendChild(hiddenTeams);
-                    
-                    const stats = Array.from(document.querySelectorAll(".stat:checked")).map(input => input.value);
-                    console.log("stats");
-                    console.log(stats);
-                    const hiddenStats = document.createElement('hiddenStat');
-                    hiddenStats.type = "hidden";
-                    hiddenStats.name = "statList";
-                    hiddenStats.value = JSON.stringify(stats);
-                    filteer.appendChild(hiddenStats); 
-                }
-            </script>
-            
-            <div id="img"></div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+
+                <input id="send" type="submit" value="Filter Results">
+            </div>
+
+        </form>
+
+
+
+
+    </div>
+
+
+    <script>
+        function submitForm() {
+            const teams = Array.from(document.querySelectorAll(".team:checked")).map(input => input.value);
+            console.log("teams");
+            console.log(teams);
+            const hiddenTeams = document.createElement('hiddenTeam');
+            hiddenTeams.type = "hidden";
+            hiddenTeams.name = "teamList";
+            hiddenTeams.value = JSON.stringify(teams);
+            const filteer = document.getElementById('filter');
+            filteer.appendChild(hiddenTeams);
+
+            const stats = Array.from(document.querySelectorAll(".stat:checked")).map(input => input.value);
+            console.log("stats");
+            console.log(stats);
+            const hiddenStats = document.createElement('hiddenStat');
+            hiddenStats.type = "hidden";
+            hiddenStats.name = "statList";
+            hiddenStats.value = JSON.stringify(stats);
+            filteer.appendChild(hiddenStats);
+        }
+    </script>
+
+    <div id="img"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
