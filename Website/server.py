@@ -29,20 +29,37 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/landing")
+def landing():
+    return render_template("landing.html")
+
+
 @app.route("/predictor")
 def predictor():
     return render_template("predictor.html")
 
+
 def load_fixtures():
-    CSV_FILE_PATH = '../data/CCFC_match_lineups_data_unaligned.csv'
+    CSV_FILE_PATH = "../data/CCFC_match_lineups_data_unaligned.csv"
     df = pd.read_csv(CSV_FILE_PATH, skip_blank_lines=True)
-    
+
     # Ensure that only rows with complete game data are kept
-    df = df.dropna(how='any')
-    
+    df = df.dropna(how="any")
+
     # Select the columns that are required
-    df = df[['date', 'Opposition', 'goals_scored', 'goals_conceded', 'shots', 'shots_on_target', 'fouls', 'possession']]
-    fixtures_data = df.to_dict(orient='records')
+    df = df[
+        [
+            "date",
+            "Opposition",
+            "goals_scored",
+            "goals_conceded",
+            "shots",
+            "shots_on_target",
+            "fouls",
+            "possession",
+        ]
+    ]
+    fixtures_data = df.to_dict(orient="records")
     return fixtures_data
 
 
@@ -50,13 +67,15 @@ def load_fixtures():
 def fixtures():
     return render_template("fixtures.html")
 
+
 @app.route("/getfixturedata", methods=["POST", "GET"])
 def getFixtureData():
     try:
         fixtures_data = load_fixtures()
         return jsonify(fixtures_data)
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": str(e)}), 500
+
 
 @app.route("/comparison")
 def comparison():
