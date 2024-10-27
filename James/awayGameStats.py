@@ -189,7 +189,7 @@ def distanceCommuteScatterGraph(dframe):
 def hsrAndSprintsCommitScatterGraph(dframe):
 
     #Filtering out rows that have NULL HSR values
-    am = dframe.dropna()[['opposition_team', 'HSR', 'Sprint', 'Commute']]
+    am = dframe[['opposition_team', 'HSR', 'Sprint', 'Commute']]
 
     #A Scatter Plot of Commute vs The distance that players ran during games between HSR and Sprints
     fig = plt.figure()
@@ -244,7 +244,7 @@ def hsrAndSprintsCommitScatterGraph(dframe):
 def xgToCommuteScatterGraph(dframe):
 
     #Filtering out rows that have NULL values
-    am = dframe.dropna()[['opposition_team', 'np_xg', 'np_xg_conceded', 'Commute']]
+    am = dframe[['opposition_team', 'np_xg', 'np_xg_conceded', 'Commute']]
 
     #A Scatter Plot of Commute vs win condition performance
     fig = plt.figure()
@@ -298,7 +298,7 @@ def xgToCommuteScatterGraph(dframe):
 
 def goalsToCommuteScatterGraph(dframe):
     #Filtering out rows that have NULL values
-    am = dframe.dropna()[['opposition_team', 'goals_scored', 'goals_conceded', 'Commute']]
+    am = dframe[['opposition_team', 'goals_scored', 'goals_conceded', 'Commute']]
 
     # A Scatter Plot of Commute vs actual win condition performance
     fig = plt.figure()
@@ -350,9 +350,34 @@ def goalsToCommuteScatterGraph(dframe):
     # Showing the graph
     #fig.show()
 
+def commuteAvgPoints(dframe):
+
+    # Only selecting the columns that I need for performance reasons
+    am = dframe[['opposition_team','Commute','match_outcome']]
+    
+
+    # Using a lambda function to add a points column according to the outcome of matches
+    am['Points'] = am['match_outcome'].apply(lambda x : 3 \
+                                   if x == 'won' else (1 \
+                                                  if x == 'draw' else 0))
+    
+    dic = {}
+    for i in range(0, am['Commute'].max(), 20000):
+        amState = am.query('@i <= Commute and @i + 20000 > Commute')
+        dic[f"{i} - {i + 19999}"] = amState['Points'].sum() / amState['Points'].count()
+
+    print(dic.keys())
+    print(dic.values())
+    amProcessed = pd.DataFrame({'Commute_Range' : dic.keys(), 'PPG' : dic.values()})
+    print(amProcessed)
+
+
+
+
 awayMatches_df = addCommuteToDataFrame()
 awayMatches_df_clean = awayMatches_df.dropna()
-#distanceCommuteScatterGraph(awayMatches_df)
-#hsrAndSprintsCommitScatterGraph(awayMatches_df)
-xgToCommuteScatterGraph(awayMatches_df_clean)
-goalsToCommuteScatterGraph(awayMatches_df_clean)
+#distanceCommuteScatterGraph(awayMatches_df_clean)
+#hsrAndSprintsCommitScatterGraph(awayMatches_df_clean)
+#xgToCommuteScatterGraph(awayMatches_df_clean)
+#goalsToCommuteScatterGraph(awayMatches_df_clean)
+commuteAvgPoints(awayMatches_df_clean)
