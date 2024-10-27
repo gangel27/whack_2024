@@ -56,7 +56,7 @@ p {
 }
 
 /* Alternating alignment */
-.left .text {
+/* .left .text {
     order: 1;
 }
 .left .image {
@@ -71,14 +71,14 @@ p {
 }
 
 /* Responsive design */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
 .section {
     flex-direction: column;
 }
 }
 
 /* Scroll animation */
-.fade-in {
+/* .fade-in {
     visibility: hidden;
 }
 
