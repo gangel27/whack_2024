@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCFC Data Analysis</title>
+    <script src='/static/js/jquery-3.7.1.min.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css" type="'text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        p {
+            font-size: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            margin-top: 8%;
+            margin-bottom: 8%;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1.4s ease;
+        }
+
+        .section:first-child {
+            margin-top: 60px;
+        }
+
+        .text {
+            border: 2px solid white;
+            border-radius: 1vw;
+            box-shadow: 0 0 12px #f0f, 0 0 12px #0ff;
+        }
+        .section img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        .text {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .image {
+            flex: 1;
+            padding: 20px;
+        }
+        .image img {
+            justify-self: center;
+            padding: 10px;
+            margin: 10px;
+            margin-left: 20%;
+            padding-right: 30px;
+            width: 80%;
+            height: 80%;
+            scale: 1.8;
+            position: relative;
+        }
+
+        /* Alternating alignment */
+        .left .text {
+            order: 1;
+        }
+        .left .image {
+            order: 2;
+        }
+
+        .right .text {
+            order: 2;
+        }
+        .right .image {
+            order: 1;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+        .section {
+            flex-direction: column;
+        }
+        }
+
+        /* Scroll animation */
+        .fade-in {
+            visibility: hidden;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        #intro {
+            padding: 5px;
+            margin: 20px;
+            margin-top: 50px;
+            justify-content: center;
+            border: 1px solid white;
+            border-radius: 1vw;
+            font-size: 18px;
+            box-shadow: 0 0 12px rgb(8, 158, 239), 0 0 12px rgb(60, 255, 0);
+        }
+        #outro {
+            padding: 5px;
+            margin: 20px;
+            justify-content: center;
+            border: 1px solid white;
+            border-radius: 1vw;
+            font-size: 18px;
+            box-shadow: 0 0 12px rgb(8, 158, 239), 0 0 12px rgb(60, 255, 0);
+        }
+    </style>
+    </head>
+
+<body class="bg-dark text-light">
+    {% include "header.html" %}
+    <div class="container-fluid text-center pt-5 bg-dark text-light mb-0">
+        <div class="title">
+            <h1>Data Analytics</h1>
+            <p id="intro">There are a lot of statistics in the data. From popular ones like xG to niche ones like
+                shots_conceded_within_8_seconds_of_corner. Which statistics are actually relevant, and which are just 
+                noise? Here we did some complex data analytics to find which statistics are most relevant and important 
+                when it comes to the one thing that actually matters: results. Knowing which statistics are most 
+                important when it comes to deciding the win helps knowing what to focus and improve on. </p>
+        </div>
+    </div>
+        
+        <section class="container">
+            <!-- Section 1 -->
+            <div class="section fade-in left">
+              <div class="text">
+                <h2>The data distribution by result</h2>
+                <p>
+                </non></p>
+              </div>
+              <div class="image">
+                <img src="./static/images/factors2.png" alt="A distance to commute length scatter graph">
+              </div>
+            </div>
+        
+            <!-- Section 2 -->
+            <div class="section fade-in right">
+              <div class="image">
+                <img src="./static/images/correlationmatrix.png" alt="Image 2">
+              </div>
+              <div class="text">
+                <h2>Correlation Matrix</h2>
+                <p>
+                </p>
+              </div>
+            </div>
+        
+            <!-- Section 3 -->
+            <div class="section fade-in left">
+              <div class="text">
+                <h2>Absolute Correlation</h2>
+                <p>Linear correlation only. 
+                </p>
+              </div>
+              <div class="image">
+                <img src="./static/images/abscorrelation.png" alt="Image 3">
+              </div>
+            </div>
+        
+            <!-- Section 4 -->
+            <div class="section fade-in right">
+              <div class="image">
+                <img src="./static/images/fscore.png"" alt="Image 4">
+              </div>
+              <div class="text">
+                <h2>F-score</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi recusandae cumque alias blanditiis fugiat officiis? Possimus accusamus exercitationem recusandae quibusdam nisi molestias itaque explicabo. Maiores nulla ducimus impedit sunt harum? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam unde beatae laudantium at sequi, dolorem quia nulla aut blanditiis dolores architecto ipsum sit modi? Dolorum quis perspiciatis sit magnam necessitatibus?</p>
+              </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="section fade-in left">
+                <div class="text">
+                  <h2>Mutual Information</h2>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate minima architecto tenetur, natus ex aliquid voluptate vero commodi sapiente dolorem blanditiis unde, id, tempora maxime illum repellendus quibusdam aliquam repudiandae. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero quasi harum soluta distinctio vitae rem iure quisquam accusamus, aperiam cum alias minus dicta aut beatae quae sed in cupiditate amet!</p>
+                </div>
+                <div class="image">
+                  <img src="./static/images/miscore.png" alt="Image 5">
+                </div>
+              </div>
+            
+               <!-- Section 6 -->
+            <div class="section fade-in right">
+                <div class="text">
+                  <h2>Feature Importance (Logistic Regression)</h2>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate minima architecto tenetur, natus ex aliquid voluptate vero commodi sapiente dolorem blanditiis unde, id, tempora maxime illum repellendus quibusdam aliquam repudiandae. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero quasi harum soluta distinctio vitae rem iure quisquam accusamus, aperiam cum alias minus dicta aut beatae quae sed in cupiditate amet!</p>
+                </div>
+                <div class="image">
+                  <img src="./static/images/logisticregression.png" alt="Image 5">
+                </div>
+              </div>
+
+                <!-- Section 6 -->
+            <div class="section fade-in left">
+                <div class="text">
+                    <h2>Feature Importance (Random Forest)</h2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate minima architecto tenetur, natus ex aliquid voluptate vero commodi sapiente dolorem blanditiis unde, id, tempora maxime illum repellendus quibusdam aliquam repudiandae. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero quasi harum soluta distinctio vitae rem iure quisquam accusamus, aperiam cum alias minus dicta aut beatae quae sed in cupiditate amet!</p>
+                </div>
+                <div class="image">
+                    <img src="./static/images/RandomForest.png" alt="Image 5">
+                </div>
+                </div>
+          </section>
+          <div>
+            <p id="outro">Conclusion                                                     average_rank  borda_score  \
+                opposition_shots_on_target                                  1.00        154.0   
+                final_third_possession                                      5.50        134.2   
+                possession                                                  7.75        124.4   
+                opposition_passes                                           8.00        123.0   
+                yellow_cards                                               10.00        115.8   
+                passes                                                     10.75        111.4   
+                Jumps                                                      10.50        111.2   
+                goals_conceded_within_8_seconds_of_indirect_fre...         10.25        110.2   
+                Sprint                                                     12.50        105.6   
+                shots_on_target                                            12.25        101.6   </p>
+          </div>
+        <!-- <img src="data:image/png;base64,{{chart_data}}" alt="Data not found" height="auto" width="auto"> -->
+        <div id="img"></div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll(".fade-in");
+
+            const handleScroll = () => {
+                sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    section.classList.add("visible");
+                }
+                });
+            };
+
+            window.addEventListener("scroll", handleScroll);
+            });
+        </script>
+    </body>
+
+</html>
