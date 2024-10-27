@@ -361,15 +361,23 @@ def commuteAvgPoints(dframe):
                                    if x == 'won' else (1 \
                                                   if x == 'draw' else 0))
     
+    #Makes a dictionary where the keys are a commute distance range and the values are
+    #the corresponding points per game. Then makes a dataframe out of it
     dic = {}
     for i in range(0, am['Commute'].max(), 20000):
         amState = am.query('@i <= Commute and @i + 20000 > Commute')
         dic[f"{i} - {i + 19999}"] = amState['Points'].sum() / amState['Points'].count()
 
-    print(dic.keys())
-    print(dic.values())
     amProcessed = pd.DataFrame({'Commute_Range' : dic.keys(), 'PPG' : dic.values()})
-    print(amProcessed)
+
+    plt.figure()
+    plt.bar(amProcessed['Commute_Range'], amProcessed['PPG'], color = 'skyblue')
+    plt.xticks(rotation = 45)
+    plt.xlabel('Commute Distance(km)')
+    plt.ylabel('Points Per Game')
+    plt.title('Bar Chart of Commute distance vs points per game'.title())
+    plt.savefig("commute-ppg-bar.png", dpi=300, bbox_inches='tight')
+    plt.show
 
 
 
