@@ -57,7 +57,7 @@
         <form class="filter mx-0" id="filter" method="POST" action="/filter" enctype="multipart/form-data">
             <div class="container w-100 px-0">
                 <div class="container row pt-3 w-100 mr-0">
-                    <div class='text-start col-4' id="leftSide">
+                    <div class='text-start col-3' id="leftSide">
                         <div class="d-flex flex-row justify-content-between">
                             <h3 class="text-start">Filter Teams</h3>
                         </div>
@@ -273,14 +273,13 @@
                             <label for="team">Manchester United</label>
                         </div>
                     </div>
-                    <div class='col-4 d-flex flex-column'>
-                        <input id="send" class="btn bg-dark text-light border-light mx-auto" type="submit"
-                            value="Filter Results">
+                    <div class='col-6 d-flex flex-column h-50'>
+                        <input id="send" class="btn bg-dark text-light border-light mx-auto" type="submit" value="Plot">
                         <img style="visibility: hidden;" id="chart" height="auto" width="auto"
-                            class='w-100 overflow-visible' src="data:image/png;base64,{{chart}}">
+                            class='flex-grow-1 w-100 overflow-visible' src="data:image/png;base64,{{chart}}">
                     </div>
 
-                    <div class='text-end col-4 mr-0 pr-0' id="rightSide">
+                    <div class='text-end col-3 mr-0 pr-0' id="rightSide">
                         <div class="text-end d-flex flex-row-reverse justify-content-between mr-auto">
                             <h3 class="">Stats</h3>
                         </div>
