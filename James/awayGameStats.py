@@ -3,6 +3,7 @@ import googlemaps as gmaps
 import matplotlib.pyplot as plt
 import numpy as np
 import pearsonr
+
 def addCommuteToDataFrame():
     # Initialize OpenRouteService client with your API key
     API_KEY = 'AIzaSyBGxmBxWKzk5l61JirnnpHFA9dakZD0cjI'
@@ -159,31 +160,31 @@ def distanceCommuteScatterGraph(dframe):
     #Using the fact that NaN != Nan to filter out rows that have NULL Distance values
     am = dframe.query('Distance == Distance')[['opposition_team', 'Distance', 'Commute']]
 
-#     #A Scatter Plot of Commute vs The distance that players ran during games
-#     plt.figure()
-#     plt.scatter(am['Distance'], am['Commute'], label = 'Data Points', alpha = 0.8)
+    #A Scatter Plot of Commute vs The distance that players ran during games
+    plt.figure()
+    plt.scatter(am['Distance'], am['Commute'], label = 'Data Points', alpha = 0.8)
 
-#     # Calculate, and plot the regression line
-#     m, b = np.polyfit(am['Distance'], am['Commute'], 1)
-#     reg = f"y = {m : .1f}x + {b : .1f}"
-#     plt.plot(am['Distance'], m * am['Distance'] + b, color = 'red', label = 'Regression Line', alpha = 1)
+    # Calculate, and plot the regression line
+    m, b = np.polyfit(am['Distance'], am['Commute'], 1)
+    reg = f"y = {m : .1f}x + {b : .1f}"
+    plt.plot(am['Distance'], m * am['Distance'] + b, color = 'red', label = 'Regression Line', alpha = 1)
 
-#     # Calculate the PMCC and p value
-#     pmcc, p = pearsonr.pearsonr(am['Distance'], am['Commute'])
+    # Calculate the PMCC and p value
+    pmcc, p = pearsonr.pearsonr(am['Distance'], am['Commute'])
 
-#     # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
-#     plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance traveled by the players during the match'.title())
-#     plt.xlabel('Distance')
-#     plt.ylabel('Commute')
-#     plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-#     plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-#     plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-#     plt.legend()
+    # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
+    plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance traveled by the players during the match'.title())
+    plt.xlabel('Distance')
+    plt.ylabel('Commute')
+    plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    plt.legend()
 
-#     #Storing the graph inside of a file
-#     plt.savefig("distance-commute-scatter.png", dpi=300, bbox_inches='tight')
-#     # Showing the graph
-#     plt.show()
+    #Storing the graph inside of a file
+    plt.savefig("distance-commute-scatter.png", dpi=300, bbox_inches='tight')
+    # Showing the graph
+    #plt.show()
 
 def hsrAndSprintsCommitScatterGraph(dframe):
 
@@ -213,7 +214,7 @@ def hsrAndSprintsCommitScatterGraph(dframe):
     fsize = 12 #setting the font size
 
     # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the two graphs
-    #sfig1.set_title('Commute Vs HSR'.title())
+    sfig1.set_title('Commute Vs HSR'.title())
     sfig1.set_xlabel('Commute(m)')
     sfig1.set_ylabel('HSR Distance(m)')
     #sfig1.text(x = 0.01, y = 0.95, s = reg1, fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
@@ -238,9 +239,120 @@ def hsrAndSprintsCommitScatterGraph(dframe):
     fig.savefig("hsr-sprint-commute-scatter.png", dpi=300, bbox_inches='tight')
 
     # Showing the graph
-    fig.show()
+    #fig.show()
 
+def xgToCommuteScatterGraph(dframe):
+
+    #Filtering out rows that have NULL values
+    am = dframe.dropna()[['opposition_team', 'np_xg', 'np_xg_conceded', 'Commute']]
+
+    #A Scatter Plot of Commute vs win condition performance
+    fig = plt.figure()
+    sfig1 = fig.add_subplot(2, 1, 1)
+    sfig2 = fig.add_subplot(2, 1, 2)
+    sfig1.scatter(am['Commute'], am['np_xg'], label = 'Data Points', alpha = 0.8)
+    sfig2.scatter(am['Commute'], am['np_xg_conceded'], label = 'Data Points', alpha = 0.8)
+
+    # Calculate, and plot the regression lines for the two graphs
+    m1, b1 = np.polyfit(am['Commute'], am['np_xg'], 1)
+    reg1 = f"y = {m1 : .1f}x + {b1 : .1f}"
+    sfig1.plot(am['Commute'], m1 * am['Commute'] + b1, color = 'red', label = 'Regression Line', alpha = 1)
+
+    m2, b2 = np.polyfit(am['Commute'], am['np_xg_conceded'], 1)
+    reg2 = f"y = {m2 : .1f}x + {b2 : .1f}"
+    sfig2.plot(am['Commute'], m2 * am['Commute'] + b2, color = 'red', label = 'Regression Line', alpha = 1)
+
+    # Calculate the PMCC and p values for the two graphs
+    pmcc1, p1 = pearsonr.pearsonr(am['Commute'], am['np_xg'])
+    pmcc2, p2 = pearsonr.pearsonr(am['Commute'], am['np_xg_conceded'])
+
+    fsize = 12 #setting the font size
+
+    # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the two graphs
+    sfig1.set_title('Commute Vs xG')
+    sfig1.set_xlabel('Commute(m)')
+    sfig1.set_ylabel('xG')
+    #sfig1.text(x = 0.01, y = 0.95, s = reg1, fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    sfig1.text(x = 0.01, y = 0.95, s = f"PMCC = {pmcc1 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    sfig1.text(x = 0.01, y = 0.85, s = f"p = {p1 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    #sfig1.legend()
+
+    sfig2.set_title('Commute Vs xG Against')
+    sfig2.set_xlabel('Commute(m)')
+    sfig2.set_ylabel('xG Against')
+    #sfig2.text(x = 0.01, y = 0.95, s = reg2, fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    sfig2.text(x = 0.01, y = 0.95, s = f"PMCC = {pmcc2 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    sfig2.text(x = 0.01, y = 0.85, s = f"p = {p2 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    sfig2.legend()
+
+    #Setting the super-title of the two-graph figure
+    fig.suptitle("Graphs showing the effect that commuting to a stadium has on the win condition performance".title())
+    
+    fig.tight_layout() #automatically spreads the graphs apart so that they don't overlap
+
+    #Storing the graph inside of a file
+    fig.savefig("xG-commute-scatter.png", dpi=300, bbox_inches='tight')
+
+    # Showing the graph
+    #fig.show()
+
+def goalsToCommuteScatterGraph(dframe):
+    #Filtering out rows that have NULL values
+    am = dframe.dropna()[['opposition_team', 'goals_scored', 'goals_conceded', 'Commute']]
+
+    # A Scatter Plot of Commute vs actual win condition performance
+    fig = plt.figure()
+    sfig1 = fig.add_subplot(2, 1, 1)
+    sfig2 = fig.add_subplot(2, 1, 2)
+    sfig1.scatter(am['Commute'], am['goals_scored'], label = 'Data Points', alpha = 0.8)
+    sfig2.scatter(am['Commute'], am['goals_conceded'], label = 'Data Points', alpha = 0.8)
+
+    # Calculate, and plot the regression lines for the two graphs
+    m1, b1 = np.polyfit(am['Commute'], am['goals_scored'], 1)
+    reg1 = f"y = {m1 : .1f}x + {b1 : .1f}"
+    sfig1.plot(am['Commute'], m1 * am['Commute'] + b1, color = 'red', label = 'Regression Line', alpha = 1)
+
+    m2, b2 = np.polyfit(am['Commute'], am['goals_conceded'], 1)
+    reg2 = f"y = {m2 : .1f}x + {b2 : .1f}"
+    sfig2.plot(am['Commute'], m2 * am['Commute'] + b2, color = 'red', label = 'Regression Line', alpha = 1)
+
+    # Calculate the PMCC and p values for the two graphs
+    pmcc1, p1 = pearsonr.pearsonr(am['Commute'], am['goals_scored'])
+    pmcc2, p2 = pearsonr.pearsonr(am['Commute'], am['goals_conceded'])
+
+    fsize = 12 #setting the font size
+
+    # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the two graphs
+    sfig1.set_title('Commute Vs Goals Scored')
+    sfig1.set_xlabel('Commute(m)')
+    sfig1.set_ylabel('Goals Scored')
+    #sfig1.text(x = 0.01, y = 0.95, s = reg1, fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    sfig1.text(x = 0.01, y = 0.95, s = f"PMCC = {pmcc1 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    sfig1.text(x = 0.01, y = 0.85, s = f"p = {p1 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig1.transAxes)
+    #sfig1.legend()
+
+    sfig2.set_title('Commute Vs Goals Against')
+    sfig2.set_xlabel('Commute(m)')
+    sfig2.set_ylabel('Goals Against')
+    #sfig2.text(x = 0.01, y = 0.95, s = reg2, fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    sfig2.text(x = 0.01, y = 0.95, s = f"PMCC = {pmcc2 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    sfig2.text(x = 0.01, y = 0.85, s = f"p = {p2 : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = sfig2.transAxes)
+    sfig2.legend()
+
+    #Setting the super-title of the two-graph figure
+    fig.suptitle("Graphs showing the effect that commuting to a stadium has on the actual win condition performance".title())
+    
+    fig.tight_layout() #automatically spreads the graphs apart so that they don't overlap
+
+    #Storing the graph inside of a file
+    fig.savefig("goals-commute-scatter.png", dpi=300, bbox_inches='tight')
+
+    # Showing the graph
+    #fig.show()
 
 awayMatches_df = addCommuteToDataFrame()
+awayMatches_df_clean = awayMatches_df.dropna()
 #distanceCommuteScatterGraph(awayMatches_df)
-hsrAndSprintsCommitScatterGraph(awayMatches_df)
+#hsrAndSprintsCommitScatterGraph(awayMatches_df)
+xgToCommuteScatterGraph(awayMatches_df_clean)
+goalsToCommuteScatterGraph(awayMatches_df_clean)

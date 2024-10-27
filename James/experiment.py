@@ -19,6 +19,7 @@ data_array = dataframe.to_numpy()
 #print(dataframe.head())
 print(dataframe['opposition_team'].dropna().nunique())
 home = 'home'
+print(dataframe[['opposition_team','match_outcome']].dropna())
 #awayMatches = dataframe.query('location == "away"')
 #print(dataframe[['opposition_team']])
 #print("\nNumPy Array:")
