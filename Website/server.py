@@ -9,6 +9,8 @@ import io
 import base64
 import json
 
+from spiderDiagrams import SpiderDiagrams
+
 matplotlib.use("Agg")
 
 
@@ -73,7 +75,13 @@ def filter():
         stats = request.form.getlist("stat")
         print(teams)
         print(stats)
-        return "check terminal"
+        SpiderDiagramMaker = SpiderDiagrams()
+        plt = SpiderDiagramMaker.plot_average_radar(teams, stats)
+        plt.show()
+        # # Example usage
+        # teams = ['Reading', 'Millwall', 'Brentford']  # Replace with your teams
+        # selected_stats = ['possession', 'np_xg', 'shots', 'pressures', 'tackles', 'goals_conceded']  # Replace with your stats
+        # plot_average_radar(teams, selected_stats)
 
     return redirect("/")
 

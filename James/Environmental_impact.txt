@@ -22,3 +22,6 @@ distance, the variance between the playstyle and overall strength of opponents h
 on these metrics than the commuting distance. Maybe our data insights can boost Coventry City FC
 to the heights of Europe - then there should be enough variance in the commuting distance to really
 put the correlations to the test.
+
+Show the sprint and hsr graphs and the be like: it appears that the physical attributes haven't really
+changed anything, but maybe their footballing ability is affected and show the xg stats

@@ -20,14 +20,23 @@
             <h1>Results</h1>
         </div>
 
-        <div></div><br>
-        <p>{{ win }}</p>
-        <p>{{ draw }}</p>
-        <p>{{ loss }}</p>
+        <div class="container-fluid results py-5">
+            <div class="h3">
+                <b>Win:</b> {{win}}%
+            </div>
+            <div class="h3 py-3">
+                <b>Draw:</b> {{draw}}%
+            </div>
+            <div class="h3">
+                <b>Loss:</b> {{loss}}%
+            </div>
+        </div>
+
+        <a href='/predictor' class="btn btn-dark border-light border">Return</a>
 
 
-        <img src="data:image/png;base64,{{chart_data}}" alt="Data not found" height="auto" width="auto">
-        <div id="img"></div>
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     </div>
 </body>
