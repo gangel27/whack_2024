@@ -28,3 +28,231 @@ print(df[['opposition_team','Distance', 'match_outcome']])
 #print(dataframe[['opposition_team']])
 #print("\nNumPy Array:")
 #print(data_array)
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCFC Data Analysis</title>
+    <script src='/static/js/jquery-3.7.1.min.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css" type="'text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        p {
+            font-size: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            margin-top: 8%;
+            margin-bottom: 8%;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1.4s ease;
+        }
+
+        .section:first-child {
+            margin-top: 60px;
+        }
+
+        .text {
+            border: 2px solid white;
+            border-radius: 1vw;
+            box-shadow: 0 0 12px #f0f, 0 0 12px #0ff;
+        }
+        .section img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        .text {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .image {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Alternating alignment */
+        .left .text {
+            order: 1;
+        }
+        .left .image {
+            order: 2;
+        }
+
+        .right .text {
+            order: 2;
+        }
+        .right .image {
+            order: 1;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+        .section {
+            flex-direction: column;
+        }
+        }
+
+        /* Scroll animation */
+        .fade-in {
+            visibility: hidden;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        #intro {
+            padding: 5px;
+            margin: 20px;
+            margin-top: 50px;
+            justify-content: center;
+            border: 1px solid white;
+            border-radius: 1vw;
+            font-size: 24px;
+            box-shadow: 0 0 12px rgb(8, 158, 239), 0 0 12px rgb(60, 255, 0);
+        }
+    </style>
+    </head>
+
+<body class="bg-dark text-light">
+    {% include "header.html" %}
+    <div class="container-fluid text-center pt-5 bg-dark text-light mb-0">
+        <div class="title">
+            <h1>Environmental Impact</h1>
+            <p id="intro">Coventry City Football Club played 101 competitive matches away from home between the 12th September 2020
+                to 4th May 2024. If we assume that the minimum number of away fans that the championship require to 
+                be allowed to buy tickets, went to those games (2000) and that they all drove from the midpoint of CBA Arena
+                to the midpoint of the opposing team's stadium, Coventry City's away games resulted in
+                35 million kilometers being travelled. If we assume that everyone drove in groups of 3, in cars that had 
+                average fuel efficiency for cars being driven in the UK
+                (<a href="https://tinyurl.com/3x86hzev">45mpg</a>)
+                , the team's away games have resulted in 260000 gallons of fuel being burned
+                (<a href="https://www.carbonindependent.org/17.html">src</a>)
+                gallons of fuel being burned - emitting almost 3 million kilograms of carbon dioxide into the atmosphere. This leads to higher
+                global average temperatures, rising sea levels and an increase in the rate of extreme weather events.
+                With climate change and sustainability in general being global concerns in the modern age,it would be 
+                suiting for a forward-thinking club like Coventry City to get reduce these numbers. Possible
+                suggestions are to employ a desginated bus fleet for fans of the clubs to go to away games, or maybe the
+                development of a car-sharing platform for Coventry City fans.
+            
+                But we wanted to find out whether long commutes are unsustainable in other ways as well? such as the performance of
+                the players. With the data provided to us, we've created graphs to visualise this argument.</p>
+        </div>
+    </div>
+        
+        <section class="container">
+            <!-- Section 1 -->
+            <div class="section fade-in left">
+              <div class="text">
+                <h2>Does commuting affect the stamina of the players?</h2>
+                <p>Personally, I always feel sluggish after a long journey, but as the graph to the right shows, a p
+                    value that high for the product moment correlation coefficient means that there's no provable correlation.
+                    And if there was, the PMCC value suggests that it would be in the opposite direction to what I was hyothesising! 
+                </non></p>
+              </div>
+              <div class="image">
+                <img src="./static/images/distance-commute-scatter.png" alt="A distance to commute length scatter graph">
+              </div>
+            </div>
+        
+            <!-- Section 2 -->
+            <div class="section fade-in right">
+              <div class="image">
+                <img src="./static/images/hsr-sprint-commute-scatter.png"" alt="Image 2">
+              </div>
+              <div class="text">
+                <h2>Does commuting affect the explosiveness of players?</h2>
+                <p>I suppose that it makes sense that a finely tuned athlete doesn't temporarily lose fitness after riding a
+                    coach. But maybe their muscles aren't quite as explosive, hence the graph to the right was created.
+                    However, again we see no determinable correlation.
+                </p>
+              </div>
+            </div>
+        
+            <!-- Section 3 -->
+            <div class="section fade-in left">
+              <div class="text">
+                <h2>Does commuting affect the quality of football?</h2>
+                <p>Phyiscally the players appear to be unaffected, but that doesn't mean that this also holds true for their
+                    footballing ability. xG is generally considered a more accurate metric for how well a team played than
+                    the result of the match. An unintenional trend has become apparent having created  of these graphs
+                    so far.
+                </p>
+              </div>
+              <div class="image">
+                <img src="./static/images/xG-commute-scatter.png" alt="Image 3">
+              </div>
+            </div>
+        
+            <!-- Section 4 -->
+            <div class="section fade-in right">
+              <div class="image">
+                <img src="./static/images/goals-commute-scatter.png" alt="Image 4">
+              </div>
+              <div class="text">
+                <h2>Does commuting affect split-second decision making?</h2>
+                <p>xG and goals both for and against frequently don't line up, be it because of random chance,
+                    luck, or the immense pressure getting to players. The above has showed that long commutes
+                    haven't bothered the players at all in any metric, but instinctive actions in either box
+                    is so-far yet to be tested.</table>
+                </p>
+              </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="section fade-in left">
+                <div class="text">
+                  <h2>Heading 5</h2>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate minima architecto tenetur, natus ex aliquid voluptate vero commodi sapiente dolorem blanditiis unde, id, tempora maxime illum repellendus quibusdam aliquam repudiandae. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero quasi harum soluta distinctio vitae rem iure quisquam accusamus, aperiam cum alias minus dicta aut beatae quae sed in cupiditate amet!</p>
+                </div>
+                <div class="image">
+                  <img src="./static/images/commute-ppg-bar.png" alt="Image 5">
+                </div>
+              </div>
+          </section>
+        <!-- <img src="data:image/png;base64,{{chart_data}}" alt="Data not found" height="auto" width="auto"> -->
+        <div id="img"></div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll(".fade-in");
+
+            const handleScroll = () => {
+                sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    section.classList.add("visible");
+                }
+                });
+            };
+
+            window.addEventListener("scroll", handleScroll);
+            });
+        </script>
+    </body>
+
+</html>
