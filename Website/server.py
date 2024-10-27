@@ -26,7 +26,7 @@ def index():
     # plt.savefig(img_buffer, format="png")
     # img_buffer.seek(0)
     # img_data = base64.b64encode(img_buffer.read()).decode()
-    return render_template("index.html")
+    return render_template("landing.html")
 
 
 @app.route("/landing")
@@ -57,6 +57,7 @@ def load_fixtures():
             "shots_on_target",
             "fouls",
             "possession",
+            "location",
         ]
     ]
     fixtures_data = df.to_dict(orient="records")

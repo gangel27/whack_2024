@@ -5,4 +5,4 @@ google maps for all 91 away games in the middle of the stadium, it complained th
 within 350m of the coordinates" I had provided and threw errors
 Switched to the google maps distance matrix api and then had to divide the 1 origin and 91 destinations into
 batches to get around the 10 origins, 10 destinations request limit
-Now it finally appears to be working
+Now it finally appears to
