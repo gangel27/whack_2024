@@ -19,12 +19,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    plt.plot([i for i in range(10)], [i + 1 for i in range(10)])
-    img_buffer = io.BytesIO()
-    plt.savefig(img_buffer, format="png")
-    img_buffer.seek(0)
-    img_data = base64.b64encode(img_buffer.read()).decode()
-    return render_template("index.html", name="new_plot", chart_data=img_data)
+    # plt.plot([i for i in range(10)], [i + 1 for i in range(10)])
+    # img_buffer = io.BytesIO()
+    # plt.savefig(img_buffer, format="png")
+    # img_buffer.seek(0)
+    # img_data = base64.b64encode(img_buffer.read()).decode()
+    return render_template("index.html")
 
 
 @app.route("/predictor")
@@ -34,7 +34,7 @@ def predictor():
 
 @app.route("/comparison")
 def comparison():
-    return render_template("comparison.html")
+    return render_template("comparison.html", chart="")
 
 
 @app.route("/sustainability")
@@ -77,13 +77,16 @@ def filter():
         print(stats)
         SpiderDiagramMaker = SpiderDiagrams()
         plt = SpiderDiagramMaker.plot_average_radar(teams, stats)
-        plt.show()
+        img_buffer = io.BytesIO()
+        plt.savefig(img_buffer, format="png")
+        img_buffer.seek(0)
+        img_data = base64.b64encode(img_buffer.read()).decode()
         # # Example usage
         # teams = ['Reading', 'Millwall', 'Brentford']  # Replace with your teams
         # selected_stats = ['possession', 'np_xg', 'shots', 'pressures', 'tackles', 'goals_conceded']  # Replace with your stats
         # plot_average_radar(teams, selected_stats)
 
-    return redirect("/")
+    return render_template("comparison.html", chart=img_data)
 
 
 if __name__ == "__main__":
