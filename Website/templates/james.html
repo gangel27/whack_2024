@@ -41,6 +41,11 @@
         .section:first-child {
             margin-top: 60px;
         }
+        #first {
+            visibility: visible;
+            transform: none;
+            transition: none;
+        }
 
         .text {
             border: 2px solid white;
@@ -89,6 +94,9 @@
         .fade-in {
             visibility: hidden;
         }
+        #first {
+            visibility: visible;
+        }
 
         .fade-in.visible {
             opacity: 1;
@@ -128,7 +136,7 @@
         </div> -->
         <section class="container">
             <!-- Section 1 -->
-            <div class="section fade-in left">
+            <div class="section fade-in left" id="first">
               <div class="text">
                 <h2>Heading 1</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nesciunt rerum ullam esse, error totam maiores minima nisi, sequi fugiat natus hic velit voluptatem et illum quam nemo similique Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit porro est autem molestias, nulla doloribus numquam voluptatem accusantium rem quisquam magnam, quod nesciunt earum enim rerum error veritatis totam nam.</non></p>
