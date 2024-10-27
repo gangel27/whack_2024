@@ -159,64 +159,67 @@ def distanceCommuteScatterGraph(dframe):
     #Using the fact that NaN != Nan to filter out rows that have NULL Distance values
     am = dframe.query('Distance == Distance')[['opposition_team', 'Distance', 'Commute']]
 
-    #A Scatter Plot of Commute vs The distance that players ran during games
-    plt.figure()
-    plt.scatter(am['Distance'], am['Commute'], label = 'Data Points', alpha = 0.8)
+#     #A Scatter Plot of Commute vs The distance that players ran during games
+#     plt.figure()
+#     plt.scatter(am['Distance'], am['Commute'], label = 'Data Points', alpha = 0.8)
 
-    # Calculate, and plot the regression line
-    m, b = np.polyfit(am['Distance'], am['Commute'], 1)
-    reg = f"y = {m : .1f}x + {b : .1f}"
-    plt.plot(am['Distance'], m * am['Distance'] + b, color = 'red', label = 'Regression Line', alpha = 1)
+#     # Calculate, and plot the regression line
+#     m, b = np.polyfit(am['Distance'], am['Commute'], 1)
+#     reg = f"y = {m : .1f}x + {b : .1f}"
+#     plt.plot(am['Distance'], m * am['Distance'] + b, color = 'red', label = 'Regression Line', alpha = 1)
+
+#     # Calculate the PMCC and p value
+#     pmcc, p = pearsonr.pearsonr(am['Distance'], am['Commute'])
+
+#     # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
+#     plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance traveled by the players during the match'.title())
+#     plt.xlabel('Distance')
+#     plt.ylabel('Commute')
+#     plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+#     plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+#     plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+#     plt.legend()
+
+#     #Storing the graph inside of a file
+#     plt.savefig("distance-commute-scatter.png", dpi=300, bbox_inches='tight')
+#     # Showing the graph
+#     plt.show()
+
+def hsrAndSprintsCommitScatterGraph(dframe):
+
+    #Filtering out rows that have NULL HSR values
+    am = dframe.dropna()[['opposition_team', 'HSR', 'Sprint', 'Commute']]
+
+    #A Scatter Plot of Commute vs The distance that players ran during games between HSR and Sprints
+    fig = plt.figure()
+    sfig1 = fig.add_subplot(1, 2, 1)
+    sfig2 = fig.add_subplot(1, 2, 2)
+    sfig1.scatter(am['Commute'], am['HSR'], label = 'Data Points', alpha = 0.8)
+    sfig2.scatter(am['Commute'], am['Sprint'], label = 'Data Points', alpha = 0.8)
+
+    # Calculate, and plot the regression lines for the two graphs
+    m1, b1 = np.polyfit(am['Commute'], am['HSR'], 1)
+    reg1 = f"y = {m1 : .1f}x + {b1 : .1f}"
+    sfig1.plot(am['Commute'], m1 * am['Commute'] + b1, color = 'red', label = 'Regression Line', alpha = 1)
 
     # Calculate the PMCC and p value
-    pmcc, p = pearsonr.pearsonr(am['Distance'], am['Commute'])
+    pmcc, p = pearsonr.pearsonr(am['Commute'], am['HSR'])
 
     # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
-    plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance traveled by the players during the match'.title())
-    plt.xlabel('Distance')
-    plt.ylabel('Commute')
+    plt.title('Scatter Plot to show the effect that the commute to a football ground has on the speed of player movement'.title())
+    plt.xlabel('Commute')
+    plt.ylabel('HSR')
     plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
     plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
     plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
     plt.legend()
 
     #Storing the graph inside of a file
-    plt.savefig("distance-commute-scatter.png", dpi=300, bbox_inches='tight')
+    plt.savefig("hsr-commute-scatter.png", dpi=300, bbox_inches='tight')
     # Showing the graph
     plt.show()
 
-def hsrCommitScatterGraph(dframe):
-    #Filtering out rows that have NULL Distance values
-    am = dframe.dropna()[['opposition_team', 'hsr', 'Commute']]
-    print(am)
-
-    # #A Scatter Plot of Commute vs The distance that players ran during games
-    # plt.figure()
-    # plt.scatter(am['Distance'], am['Commute'], label = 'Data Points', alpha = 0.8)
-
-    # # Calculate, and plot the regression line
-    # m, b = np.polyfit(am['Distance'], am['Commute'], 1)
-    # reg = f"y = {m : .1f}x + {b : .1f}"
-    # plt.plot(am['Distance'], m * am['Distance'] + b, color = 'red', label = 'Regression Line', alpha = 1)
-
-    # # Calculate the PMCC and p value
-    # pmcc, p = pearsonr.pearsonr(am['Distance'], am['Commute'])
-
-    # # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
-    # plt.title('Scatter Plot to show the effect that the commute to a football ground has on the distance traveled by the players during the match'.title())
-    # plt.xlabel('Distance')
-    # plt.ylabel('Commute')
-    # plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-    # plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-    # plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-    # plt.legend()
-
-    # #Storing the graph inside of a file
-    # plt.savefig("distance-commute-scatter.png", dpi=300, bbox_inches='tight')
-    # # Showing the graph
-    # plt.show()
-    # return None
-
 
 awayMatches_df = addCommuteToDataFrame()
-distanceCommuteScatterGraph(awayMatches_df)
+#distanceCommuteScatterGraph(awayMatches_df)
+hsrAndSprintsCommitScatterGraph(awayMatches_df)
