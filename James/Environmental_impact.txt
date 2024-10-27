@@ -16,3 +16,9 @@ suggests include desginated bus fleet for fans of the clubs to get on to go to a
 introduction of a car-sharing platform for coventry city fans.
 
 But we wanted to find out whether travelling for matches also affected the players as well...
+Since most things seem to have very slight (insignificant) positive correlation, could mention
+that since there were only 46 unique teams in the entire data set, towards the higher ends of commute
+distance, the variance between the playstyle and overall strength of opponents had a greater affect
+on these metrics than the commuting distance. Maybe our data insights can boost Coventry City FC
+to the heights of Europe - then there should be enough variance in the commuting distance to really
+put the correlations to the test.

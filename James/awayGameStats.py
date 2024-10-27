@@ -192,8 +192,8 @@ def hsrAndSprintsCommitScatterGraph(dframe):
 
     #A Scatter Plot of Commute vs The distance that players ran during games between HSR and Sprints
     fig = plt.figure()
-    sfig1 = fig.add_subplot(1, 2, 1)
-    sfig2 = fig.add_subplot(1, 2, 2)
+    sfig1 = fig.add_subplot(2, 1, 1)
+    sfig2 = fig.add_subplot(2, 1, 2)
     sfig1.scatter(am['Commute'], am['HSR'], label = 'Data Points', alpha = 0.8)
     sfig2.scatter(am['Commute'], am['Sprint'], label = 'Data Points', alpha = 0.8)
 
@@ -202,22 +202,41 @@ def hsrAndSprintsCommitScatterGraph(dframe):
     reg1 = f"y = {m1 : .1f}x + {b1 : .1f}"
     sfig1.plot(am['Commute'], m1 * am['Commute'] + b1, color = 'red', label = 'Regression Line', alpha = 1)
 
-    # Calculate the PMCC and p value
-    pmcc, p = pearsonr.pearsonr(am['Commute'], am['HSR'])
+    m2, b2 = np.polyfit(am['Commute'], am['Sprint'], 1)
+    reg2 = f"y = {m2 : .1f}x + {b2 : .1f}"
+    sfig2.plot(am['Commute'], m2 * am['Commute'] + b2, color = 'red', label = 'Regression Line', alpha = 1)
 
-    # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the graph
-    plt.title('Scatter Plot to show the effect that the commute to a football ground has on the speed of player movement'.title())
-    plt.xlabel('Commute')
-    plt.ylabel('HSR')
-    plt.text(x = 0.05, y = 0.90, s = reg, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-    plt.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-    plt.text(x = 0.05, y = 0.80, s = f"p = {p : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
-    plt.legend()
+    # Calculate the PMCC and p values for the two graphs
+    pmcc1, p1 = pearsonr.pearsonr(am['Commute'], am['HSR'])
+    pmcc2, p2 = pearsonr.pearsonr(am['Commute'], am['HSR'])
+
+    # Adding a title, labels, the regression line, pmcc and p value, and a legend/key to the two graphs
+    #sfig1.set_title('Commute Vs HSR'.title())
+    sfig1.set_xlabel('Commute(m)')
+    sfig1.set_ylabel('HSR Distance(m)')
+    sfig1.text(x = 0.05, y = 0.90, s = reg1, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    sfig1.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc1 : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    sfig1.text(x = 0.05, y = 0.80, s = f"p = {p1 : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    sfig1.legend()
+
+    #sfig2.set_title('Commute Vs Sprints'.title())
+    sfig2.set_xlabel('Commute(m)')
+    sfig2.set_ylabel('Sprint Distance(m)')
+    sfig2.(x = 0.05, y = 0.90, s = reg2, fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    sfig2.text(x = 0.05, y = 0.85, s = f"PMCC = {pmcc2 : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    sfig2.text(x = 0.05, y = 0.80, s = f"p = {p2 : .2f}", fontsize = 12, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    sfig2.legend()
+
+    #Setting the super-title of the two-graph figure
+    fig.suptitle("Graphs showing the effect that commuting to a stadium has on movement speed".title())
+    
+    fig.tight_layout() #automatically spreads the graphs apart so that they don't overlap
 
     #Storing the graph inside of a file
-    plt.savefig("hsr-commute-scatter.png", dpi=300, bbox_inches='tight')
+    fig.savefig("hsr-sprint-commute-scatter.png", dpi=300, bbox_inches='tight')
+
     # Showing the graph
-    plt.show()
+    fig.show()
 
 
 awayMatches_df = addCommuteToDataFrame()
