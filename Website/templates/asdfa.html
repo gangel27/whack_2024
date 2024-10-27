@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Team Fixtures</title>
+
+    <!-- <style>
+        /* General styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            width: 100%;
+            display: flex;
+            overflow-x: auto;
+            background-color: #1e2a38;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .navbar-item {
+            flex: 0 0 auto;
+            padding: 10px 20px;
+            color: white;
+            background-color: #35495e;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            min-width: 100px;
+            white-space: nowrap;
+        }
+
+        .navbar-item.active {
+            background-color: #42b883;
+            font-weight: bold;
+        }
+
+        .navbar-item:hover {
+            background-color: #42b883;
+        }
+
+        /* Main content styling */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .game-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .game-card h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #42b883;
+        }
+
+        .game-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            flex: 1 1 45%;
+            padding: 10px;
+            background-color: #e8eef3;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .stat-item strong {
+            display: block;
+            color: #333;
+            font-size: 1.1em;
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <!-- Scrolling Navbar -->
+    <div class="navbar" id="gamesNavbar"></div>
+
+    <!-- Main Content Area -->
+    <div class="content">
+        <div class="game-card" id="gameCard">
+            <h1>Select a Game</h1>
+            <div class="game-stats" id="gameStats">
+                <!-- Stats will populate here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fetch the fixtures data and dynamically create the navbar and main display
+        fetch('/getfixturedata')
+            .then(response => response.json())
+            .then(data => {
+                const navbar = document.getElementById('gamesNavbar');
+                const gameCard = document.getElementById('gameCard');
+                const gameStats = document.getElementById('gameStats');
+
+                data.forEach((game, index) => {
+                    // Create a navbar item for each game
+                    const navItem = document.createElement('div');
+                    navItem.classList.add('navbar-item');
+                    navItem.textContent = `${game.date} - ${game.Opposition}`;
+                    navItem.onclick = () => displayGame(game, navItem);
+                    navbar.appendChild(navItem);
+                });
+
+                function displayGame(game, selectedNavItem) {
+                    // Set active class on selected navbar item
+                    document.querySelectorAll('.navbar-item').forEach(item => item.classList.remove('active'));
+                    selectedNavItem.classList.add('active');
+
+                    // Update game card with score
+                    gameCard.querySelector('h1').textContent = `${game.goals_scored} - ${game.goals_conceded}`;
+
+                    // Update game stats
+                    gameStats.innerHTML = `
+                        <div class="stat-item"><strong>Opponent:</strong> ${game.Opposition}</div>
+                        <div class="stat-item"><strong>Date:</strong> ${game.date}</div>
+                        <div class="stat-item"><strong>Goals Scored:</strong> ${game.goals_scored}</div>
+                        <div class="stat-item"><strong>Goals Conceded:</strong> ${game.goals_conceded}</div>
+                        <div class="stat-item"><strong>Shots:</strong> ${game.shots}</div>
+                        <div class="stat-item"><strong>Shots on Target:</strong> ${game.shots_on_target}</div>
+                        <div class="stat-item"><strong>Fouls:</strong> ${game.fouls}</div>
+                        <div class="stat-item"><strong>Possession:</strong> ${game.possession}%</div>
+                    `;
+                }
+            })
+            .catch(error => console.error('Error fetching the fixtures:', error));
+    </script>
+</body>
+
+</html>
