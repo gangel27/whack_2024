@@ -22,8 +22,6 @@
             background-color: #fff;
             -webkit-box-shadow: inset 0 0 6px rgba(90, 90, 90, 0.7);
         }
-
-        Share
     </style>
 </head>
 
@@ -36,9 +34,9 @@
     <div class="container py-5 ">
         <!-- Main Content Area -->
         <div class="container mt-4">
-            <div class="card bg-dark text-center text-light mb-4 outline-0 shadow-none" id="gameCard">
-                <div class="card-body">
-                    <h1 class="text-light bg-dark display-5">Select a Game</h1>
+            <div class="card text-center bg-dark text-light mb-4 border border-light shadow-none" id="gameCard">
+                <div class="card-body ">
+                    <h1 class="text-light display-5">Select a Game</h1>
                     <div class="row row-cols-1 row-cols-md-2 g-3 mt-4" id="gameStats">
                         <!-- Stats will populate here -->
                     </div>
@@ -86,14 +84,14 @@
 
                     // Update game stats
                     gameStats.innerHTML = `
-                        <div class="col"><div class="p-3 bg-dark rounded"><strong>Opponent:</strong> ${game.Opposition}</div></div>
-                        <div class="col"><div class="p-3 bg-dark rounded"><strong>Date:</strong> ${game.date}</div></div>
-                        <div class="col"><div class="p-3 bg-dark rounded"><strong>Goals Scored:</strong> ${game.goals_scored}</div></div>
-                        <div class="col"><div class="p-3 bg-dark rounded"><strong>Goals Conceded:</strong> ${game.goals_conceded}</div></div>
-                        <div class="col"><div class="p-3 bg-dark rounded"><strong>Shots:</strong> ${game.shots}</div></div>
-                        <div class="col"><div class="p-3 bg-dark rounded"><strong>Shots on Target:</strong> ${game.shots_on_target}</div></div>
-                        <div class="col"><div class="p-3 bg-dark rounded"><strong>Fouls:</strong> ${game.fouls}</div></div>
-                        <div class="col"><div class="p-3 bg-dark rounded"><strong>Possession:</strong> ${game.possession}%</div></div>
+                        <div class="col"><div style="background-color: #202020;" class="p-3 bg-dark rounded"><strong>Opponent:</strong> ${game.Opposition}</div></div>
+                        <div class="col"><div style="background-color: #202020;" class="p-3 bg-dark rounded"><strong>Date:</strong> ${game.date}</div></div>
+                        <div class="col"><div style="background-color: #202020;" class="p-3 bg-dark rounded"><strong>Goals Scored:</strong> ${game.goals_scored}</div></div>
+                        <div class="col"><div style="background-color: #202020;" class="p-3 bg-dark rounded"><strong>Goals Conceded:</strong> ${game.goals_conceded}</div></div>
+                        <div class="col"><div style="background-color: #202020;" class="p-3 bg-dark rounded"><strong>Shots:</strong> ${game.shots}</div></div>
+                        <div class="col"><div style="background-color: #202020;" class="p-3 bg-dark rounded"><strong>Shots on Target:</strong> ${game.shots_on_target}</div></div>
+                        <div class="col"><div style="background-color: #202020;" class="p-3 bg-dark rounded"><strong>Fouls:</strong> ${game.fouls}</div></div>
+                        <div class="col"><div style="background-color: #202020;" class="p-3 bg-dark rounded"><strong>Possession:</strong> ${game.possession}%</div></div>
                     `;
                 }
             })
