@@ -1,6 +1,89 @@
-.left {
-    text-align: left;
+/* 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.right {
-    text-align: right;
+
+p {
+    font-size: 20px;
 }
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+.section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 0;
+    margin-top: 8%;
+    margin-bottom: 8%;
+    opacity: 0;
+    transform: translateY(80px);
+    transition: all 1.4s ease;
+}
+
+.section:first-child {
+    margin-top: 60px;
+}
+#first {
+    visibility: visible;
+    transform: none;
+    transition: none;
+}
+
+.text {
+    border: 2px solid white;
+    border-radius: 1vw;
+    box-shadow: 0 0 12px #f0f, 0 0 12px #0ff;
+}
+.section img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+.text {
+    flex: 1;
+    padding: 20px;
+}
+
+.image {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Alternating alignment */
+.left .text {
+    order: 1;
+}
+.left .image {
+    order: 2;
+}
+
+.right .text {
+    order: 2;
+}
+.right .image {
+    order: 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+.section {
+    flex-direction: column;
+}
+}
+
+/* Scroll animation */
+.fade-in {
+    visibility: hidden;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+} */
