@@ -3,6 +3,7 @@ import googlemaps as gmaps
 import matplotlib.pyplot as plt
 import numpy as np
 import pearsonr
+import math
 
 def addCommuteToDataFrame():
     # Initialize OpenRouteService client with your API key
@@ -362,21 +363,39 @@ def commuteAvgPoints(dframe):
                                                   if x == 'draw' else 0))
     
     #Makes a dictionary where the keys are a commute distance range and the values are
-    #the corresponding points per game. Then makes a dataframe out of it
+    #the corresponding points per game
     dic = {}
+    dic1 = {}
     for i in range(0, am['Commute'].max(), 20000):
         amState = am.query('@i <= Commute and @i + 20000 > Commute')
-        dic[f"{i} - {i + 19999}"] = amState['Points'].sum() / amState['Points'].count()
+        j = round(i / 1000)
+        dic[f"{j} - {j + 20}"] = amState['Points'].sum() / amState['Points'].count()
+        dic1[j + 10] = ""
 
-    amProcessed = pd.DataFrame({'Commute_Range' : dic.keys(), 'PPG' : dic.values()})
+    #Then makes a dataframe out of it
+    amProcessed = pd.DataFrame({'Commute_Range' : dic.keys(), 'Commute_Avg' : dic1.keys(), 'PPG' : dic.values()})
+    
+    # #With dic1 had to do something different to make a regression line for the bar chart
+    # amProcessedRegLine = pd.DataFrame({Commute_avg : dic1.keys(), 'PPG'})
+    amProcessed_clean = amProcessed.dropna()
 
     plt.figure()
-    plt.bar(amProcessed['Commute_Range'], amProcessed['PPG'], color = 'skyblue')
+    plt.bar(amProcessed_clean['Commute_Range'], amProcessed_clean['PPG'], color = 'skyblue', width = 0.3)
+
+    # m, b = np.polyfit(amProcessed_clean['Commute_Avg'], amProcessed_clean['PPG'], 1)
+    # plt.plot(amProcessed_clean['Commute_Avg'], m * amProcessed_clean['Commute_Avg'] + b, color = 'red', label = 'Regression Line', alpha = 1)
+
+    pmcc, p = pearsonr.pearsonr(am['Commute'], amProcessed_clean['PPG'])
+    fsize = 12
+
     plt.xticks(rotation = 45)
     plt.xlabel('Commute Distance(km)')
     plt.ylabel('Points Per Game')
+    plt.text(x = 0.01, y = 0.95, s = f"PMCC = {pmcc : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = plt.gca().transAxes)
+    plt.text(x = 0.01, y = 0.90, s = f"p = {p : .2f}", fontsize = fsize, ha = 'left', va = 'top', transform = plt.gca().transAxes)
     plt.title('Bar Chart of Commute distance vs points per game'.title())
-    plt.savefig("commute-ppg-bar.png", dpi=300, bbox_inches='tight')
+    plt.legend()
+    plt.savefig("commute-ppg-bar2.png", dpi=300, bbox_inches='tight')
     plt.show
 
 
