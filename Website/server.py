@@ -75,8 +75,8 @@ def filter():
         stats = request.form.getlist("stat")
         print(teams)
         print(stats)
-
-        plt = SpiderDiagrams.plot_average_radar(teams, stats)
+        SpiderDiagramMaker = SpiderDiagrams()
+        plt = SpiderDiagramMaker.plot_average_radar(teams, stats)
         plt.show()
         # # Example usage
         # teams = ['Reading', 'Millwall', 'Brentford']  # Replace with your teams

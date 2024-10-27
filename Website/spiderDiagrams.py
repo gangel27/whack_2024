@@ -11,13 +11,11 @@ import pandas as pd
 
 
 class SpiderDiagrams():
+    def __init__(self):
+        self.df = pd.read_csv('../Krishna/CCFC_match_lineups_data.csv')
+        self.df = self.df.dropna(how='any')
 
-    def __init__():
-        df = pd.read_csv('CCFC_match_lineups_data.csv')
-        df = df.dropna(how='any')
-        pass
-
-    def radar_factory(num_vars, frame='Circle'):
+    def radar_factory(self, num_vars, frame='Circle'):
     
         theta = np.linspace(0, 2*np.pi, num_vars, endpoint=False)
 
@@ -75,23 +73,25 @@ class SpiderDiagrams():
         register_projection(RadarAxes)
         return theta
     
-    def normalize_data(data):
+    def normalize_data(self, data):
         """ Normalize the data to the range [0, 1] """
         return (data - data.min()) / (data.max() - data.min())
 
-    def plot_average_radar(teams, selected_stats):
+    def plot_average_radar(self, teams, selected_stats):
         # Filter the DataFrame for the specified teams
-        filtered_df = df[df['Opposition'].isin(teams)]
+        filtered_df = self.df[self.df['Opposition'].isin(teams)]
 
         for stat in selected_stats:
-            filtered_df[stat] = normalize_data(filtered_df[stat])
+            # Normalize the specific stat column
+            filtered_df[stat] = self.normalize_data(filtered_df[stat])
+            
 
         # Calculate the average for the specified statistics
         averages = filtered_df.groupby('Opposition')[selected_stats].mean().reset_index()
 
         # Create radar chart
         N = len(selected_stats)
-        theta = radar_factory(N, frame='polygon')
+        theta = self.radar_factory(N, frame='polygon')
 
         fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(projection='radar'))
 
