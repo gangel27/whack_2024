@@ -6,7 +6,7 @@ import pearsonr
 
 def addCommuteToDataFrame():
     # Initialising the Google Maps Distance Matrix API
-    API_KEY = 'AIzaSyBGxmBxWKzk5l61JirnnpHFA9dakZD0cjI'
+    API_KEY = 'AIzaSyAMgodb-bRoaRLgQJYSLLSeYyHxTH5doso'
     cli = gmaps.Client(key=API_KEY)
 
     coventry_stadium_coords = (52.4481, -1.4944)
