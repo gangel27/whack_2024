@@ -3,11 +3,11 @@ import googlemaps as gmaps
 import matplotlib.pyplot as plt
 import numpy as np
 import pearsonr
+import creds
 
 def addCommuteToDataFrame():
     # Initialising the Google Maps Distance Matrix API
-    API_KEY = 'AIzaSyAMgodb-bRoaRLgQJYSLLSeYyHxTH5doso'
-    cli = gmaps.Client(key=API_KEY)
+    cli = gmaps.Client(key=creds.API_KEY)
 
     coventry_stadium_coords = (52.4481, -1.4944)
 
