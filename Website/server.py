@@ -87,6 +87,9 @@ def comparison():
 def sustainability():
     return render_template("james.html")
 
+@app.route("/analytics")
+def analytics():
+    return render_template("analytics.html")
 
 @app.route("/pred_results")
 def pred_results():
